@@ -7,7 +7,7 @@ class Node:
 
 
 class ListNode:
-    """链表的实现"""
+    """单向链表的实现"""
 
     def __init__(self, node=None):
         self._head = node  # 链表的头部
@@ -30,6 +30,7 @@ class ListNode:
         while cur is not None:
             print(cur.name, end=" ")
             cur = cur.next
+        print("")
 
     def append(self, num):
         """在尾部添加元素"""
@@ -75,6 +76,35 @@ class ListNode:
         elem.next = cur.next
         cur.next = elem
 
+    def search(self, item):
+        """查找节点
+        ：:param item 一个val
+        """
+        cur = self._head
+        while cur is not None:
+            if cur.name == item:
+                return True
+            cur = cur.next
+        return False
+
+    def remove(self, item):
+        """删除节点"""
+        cur = self._head
+        pre = None
+        # pre = self._head
+        # if cur.name == item:
+        #     self._head = cur.next
+        #     return
+        while cur is not None:
+            if cur.name == item:
+                if pre is None:
+                    self._head = cur.next
+                else:
+                    pre.next = cur.next
+                return
+            pre = cur
+            cur = cur.next
+
 
 if __name__ == '__main__':
     listnode = ListNode()
@@ -85,8 +115,14 @@ if __name__ == '__main__':
     listnode.append(3)
     listnode.append(4)
     listnode.append(5)
+    listnode.append(3)
     listnode.append(6)
     listnode.traversal()
     print()
     listnode.insert(8, 99)
+    listnode.traversal()
+
+    print(listnode.search(5))
+
+    listnode.remove(1)
     listnode.traversal()
