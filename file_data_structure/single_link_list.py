@@ -44,7 +44,7 @@ class ListNode:
             cur.next = elem
 
     def add(self, num):
-        """在指定位置添加元素"""
+        """在头部添加元素"""
         elem = Node(num)
         elem.next = self._head
         self._head = elem
