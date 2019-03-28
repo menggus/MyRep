@@ -6,7 +6,7 @@
 
 def select_sort(lis):
     n = len(lis)
-    for j in range(n-2):
+    for j in range(n-1):  # 注意这里的j最多取到到数第二个位置
         min_index = j
         for i in range(j+1, n):
             if lis[min_index] > lis[i]:
