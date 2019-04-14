@@ -1,0 +1,315 @@
+{
+    "language": "华语",
+    "song_list": [
+        {
+            "username": "狗大叔爱听歌",
+            "fav": "5945",
+            "share": "22",
+            "comment": "56",
+            "playlist": "50",
+            "playcount": "721054",
+            "music_info": [
+                {
+                    "name": "可能否",
+                    "singer": "木小雅",
+                    "link": "https://music.163.com/song?id=569214126",
+                    "time": "03:47"
+                },
+                {
+                    "name": "静悄悄",
+                    "singer": "陈泫孝（大泫）",
+                    "link": "https://music.163.com/song?id=553815178",
+                    "time": "03:05"
+                },
+                {
+                    "name": "去未来",
+                    "singer": "Mr.钛戈",
+                    "link": "https://music.163.com/song?id=1297492124",
+                    "time": "04:06"
+                },
+                {
+                    "name": "了解(Knowing)",
+                    "singer": "余佳运",
+                    "link": "https://music.163.com/song?id=1315169726",
+                    "time": "03:36"
+                },
+                {
+                    "name": "无所求必满载而归",
+                    "singer": "陈粒",
+                    "link": "https://music.163.com/song?id=1354445115",
+                    "time": "04:10"
+                },
+                {
+                    "name": "你是人间四月天",
+                    "singer": "解忧邵帅",
+                    "link": "https://music.163.com/song?id=1344897943",
+                    "time": "03:42"
+                },
+                {
+                    "name": "童话不要离开",
+                    "singer": "张文成",
+                    "link": "https://music.163.com/song?id=1313597671",
+                    "time": "04:57"
+                },
+                {
+                    "name": "美好事物",
+                    "singer": "房东的猫",
+                    "link": "https://music.163.com/song?id=417596830",
+                    "time": "03:18"
+                },
+                {
+                    "name": "繁华之处",
+                    "singer": "栗先达",
+                    "link": "https://music.163.com/song?id=521780143",
+                    "time": "03:31"
+                },
+                {
+                    "name": "蚂蚁先生",
+                    "singer": "蚂蚁先生",
+                    "link": "https://music.163.com/song?id=41663820",
+                    "time": "03:02"
+                },
+                {
+                    "name": "艺术家",
+                    "singer": "徐秉龙",
+                    "link": "https://music.163.com/song?id=1323303739",
+                    "time": "03:58"
+                },
+                {
+                    "name": "你的姑娘",
+                    "singer": "隔壁老樊",
+                    "link": "https://music.163.com/song?id=1356499052",
+                    "time": "04:08"
+                },
+                {
+                    "name": "认真地老去",
+                    "singer": "张希/曹方",
+                    "link": "https://music.163.com/song?id=461080452",
+                    "time": "03:43"
+                },
+                {
+                    "name": "像我这样的人",
+                    "singer": "毛不易",
+                    "link": "https://music.163.com/song?id=569213220",
+                    "time": "03:27"
+                },
+                {
+                    "name": "独居男子",
+                    "singer": "沈以诚",
+                    "link": "https://music.163.com/song?id=1347692190",
+                    "time": "04:44"
+                },
+                {
+                    "name": "平凡的你我",
+                    "singer": "马良",
+                    "link": "https://music.163.com/song?id=1334296172",
+                    "time": "03:59"
+                },
+                {
+                    "name": "觅香",
+                    "singer": "栗先达",
+                    "link": "https://music.163.com/song?id=507815173",
+                    "time": "04:17"
+                },
+                {
+                    "name": "眉间心上",
+                    "singer": "鲁向卉",
+                    "link": "https://music.163.com/song?id=1346093333",
+                    "time": "04:41"
+                },
+                {
+                    "name": "绿色",
+                    "singer": "陈雪凝",
+                    "link": "https://music.163.com/song?id=1345848098",
+                    "time": "04:29"
+                },
+                {
+                    "name": "桥下",
+                    "singer": "谢春花",
+                    "link": "https://music.163.com/song?id=1355940642",
+                    "time": "03:51"
+                },
+                {
+                    "name": "生而为人",
+                    "singer": "尚士达",
+                    "link": "https://music.163.com/song?id=1335350269",
+                    "time": "05:19"
+                },
+                {
+                    "name": " 我要变好看 ",
+                    "singer": "阿涵",
+                    "link": "https://music.163.com/song?id=1303019479",
+                    "time": "03:20"
+                },
+                {
+                    "name": "哗啦啦少年再见",
+                    "singer": "焦迈奇",
+                    "link": "https://music.163.com/song?id=1323301155",
+                    "time": "03:51"
+                },
+                {
+                    "name": "焦糖人生",
+                    "singer": "王博文",
+                    "link": "https://music.163.com/song?id=1354428575",
+                    "time": "04:08"
+                },
+                {
+                    "name": "朵 - (Dorr)",
+                    "singer": "赵雷",
+                    "link": "https://music.163.com/song?id=447926063",
+                    "time": "04:52"
+                },
+                {
+                    "name": "胆小鬼",
+                    "singer": "徐秉龙",
+                    "link": "https://music.163.com/song?id=1355927292",
+                    "time": "04:03"
+                },
+                {
+                    "name": "穿山",
+                    "singer": "杨宗纬",
+                    "link": "https://music.163.com/song?id=1357006458",
+                    "time": "02:42"
+                },
+                {
+                    "name": "假装",
+                    "singer": "陈雪凝",
+                    "link": "https://music.163.com/song?id=504835560",
+                    "time": "04:24"
+                },
+                {
+                    "name": "假如我",
+                    "singer": "解忧邵帅",
+                    "link": "https://music.163.com/song?id=1353236929",
+                    "time": "04:27"
+                },
+                {
+                    "name": "去见你",
+                    "singer": "徐秉龙",
+                    "link": "https://music.163.com/song?id=1354629987",
+                    "time": "02:50"
+                },
+                {
+                    "name": "你那边还好吗",
+                    "singer": "李子阳",
+                    "link": "https://music.163.com/song?id=1328021954",
+                    "time": "05:03"
+                },
+                {
+                    "name": "跟我在一起",
+                    "singer": "很美味",
+                    "link": "https://music.163.com/song?id=1311346560",
+                    "time": "03:09"
+                },
+                {
+                    "name": "我曾",
+                    "singer": "隔壁老樊",
+                    "link": "https://music.163.com/song?id=1336856777",
+                    "time": "04:45"
+                },
+                {
+                    "name": "多想在平庸的生活拥抱你",
+                    "singer": "隔壁老樊",
+                    "link": "https://music.163.com/song?id=1346104327",
+                    "time": "04:29"
+                },
+                {
+                    "name": "路过人间 - (Walking by the world)",
+                    "singer": "郁可唯",
+                    "link": "https://music.163.com/song?id=1354477202",
+                    "time": "04:05"
+                },
+                {
+                    "name": "解忧",
+                    "singer": "解忧邵帅",
+                    "link": "https://music.163.com/song?id=1349381229",
+                    "time": "04:23"
+                },
+                {
+                    "name": "别担心",
+                    "singer": "Toy王奕/林渝植Anoryz",
+                    "link": "https://music.163.com/song?id=1356547995",
+                    "time": "03:56"
+                },
+                {
+                    "name": "神秘嘉宾",
+                    "singer": "钱正昊",
+                    "link": "https://music.163.com/song?id=1356738952",
+                    "time": "05:08"
+                },
+                {
+                    "name": "像风走了八千里",
+                    "singer": "胜娚（王胜男）",
+                    "link": "https://music.163.com/song?id=1354477597",
+                    "time": "03:45"
+                },
+                {
+                    "name": "骨子里的我",
+                    "singer": "李代沫",
+                    "link": "https://music.163.com/song?id=26584214",
+                    "time": "03:31"
+                },
+                {
+                    "name": "有可能的夜晚",
+                    "singer": "任然",
+                    "link": "https://music.163.com/song?id=1357399300",
+                    "time": "05:00"
+                },
+                {
+                    "name": "这一路走来",
+                    "singer": "杨宗纬",
+                    "link": "https://music.163.com/song?id=26075553",
+                    "time": "04:17"
+                },
+                {
+                    "name": "想要把全宇宙最特别的爱都给你",
+                    "singer": "高姗",
+                    "link": "https://music.163.com/song?id=1336856865",
+                    "time": "03:19"
+                },
+                {
+                    "name": "不打扰",
+                    "singer": "接个吻，开一枪/沈以诚/刘思鉴",
+                    "link": "https://music.163.com/song?id=571338448",
+                    "time": "02:56"
+                },
+                {
+                    "name": "未妨惆怅是清狂",
+                    "singer": "太一",
+                    "link": "https://music.163.com/song?id=534699268",
+                    "time": "03:44"
+                },
+                {
+                    "name": "这个大叔不太冷",
+                    "singer": "马良/花粥",
+                    "link": "https://music.163.com/song?id=1336871705",
+                    "time": "03:52"
+                },
+                {
+                    "name": "看到风",
+                    "singer": "冯提莫",
+                    "link": "https://music.163.com/song?id=1356867253",
+                    "time": "05:19"
+                },
+                {
+                    "name": "推开世界的门",
+                    "singer": "杨乃文",
+                    "link": "https://music.163.com/song?id=441120217",
+                    "time": "04:42"
+                },
+                {
+                    "name": "你还在忧愁什么呢",
+                    "singer": "花粥/厘小白",
+                    "link": "https://music.163.com/song?id=1324447466",
+                    "time": "03:14"
+                },
+                {
+                    "name": "我愿意平凡的陪在你身旁",
+                    "singer": "王七七",
+                    "link": "https://music.163.com/song?id=1351551838",
+                    "time": "02:29"
+                }
+            ]
+        }
+    ]
+}
