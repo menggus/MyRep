@@ -3,6 +3,8 @@ from selenium import webdriver
 import time
 import json
 
+
+
 class WangYimusicSpider:
 
     def __init__(self):
@@ -127,7 +129,7 @@ class WangYimusicSpider:
             song_list["language"] = language
             song_list["url_list"] = self.driver_url(url)
             div_language_music_list.append(song_list)
-            print(song_list)
+
             break
 
         # 3.提取详情页数据
