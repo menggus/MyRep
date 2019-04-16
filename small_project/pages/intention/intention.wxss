@@ -1,0 +1,112 @@
+/* pages/intention/intention.wxss */
+
+.page-intention {
+    width: 100%;
+    height: 100%;
+}
+
+.diviline {
+    background: #e6e6e6;
+    height: 1vh;
+}
+
+.content {
+    padding: 1vh 50rpx;
+}
+
+.process-info {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    padding-left: 50rpx;
+    padding-right: 50rpx;
+}
+
+.progress-info-title {
+    padding-left: 25rpx;
+    padding-right: 25rpx;
+}
+
+.item {
+    width: 50rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+}
+
+.director-line {
+    margin: 0 -20rpx;
+    width: 230rpx;
+    height: 10rpx;
+    background-color: #e6e6e6;
+}
+
+.item-title {
+    font-size: 25rpx;
+}
+
+.swiper-content {
+    width: 100%;
+    height: 69vh;
+    background-color: #fff;
+    font-size: 30rpx;
+}
+
+.swiper-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.elem-item {
+    display: flex;
+    padding-left: 20rpx;
+    height: 7vh;
+    line-height: 7vh;
+    text-align: center;
+}
+
+.hor-line {
+    margin: 0 20rpx;
+    height: 1px;
+    background-color: #b9b6b6;
+}
+
+.select {
+    width: 30%;
+    text-align: center;
+}
+
+
+
+.text-item {
+    padding: 0 10rpx;
+}
+
+.textarea-sty {
+    width: 700rpx;
+    /* height: 5vh; */
+    font-size: 28rpx;
+    height: auto;
+}
+
+.double-btn {
+    display: flex;
+    margin:1vh 0;
+
+}
+
+.btn-sty {
+    width: 40%;
+    height: 6vh;
+    line-height: 6vh;
+    background-color:#f34573;
+}
+.submit-btn{
+    width: 90%;
+    margin-bottom: 1vh;
+    background-color: #2a6171;
+}

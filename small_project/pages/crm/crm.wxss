@@ -1,0 +1,37 @@
+/* pages/crm/crm.wxss */
+
+.line_view {
+    width: 100%;
+    height: 1vh;
+    background-color: #e0e3da;
+}
+
+.content-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 20rpx;
+    line-height: 6vh;
+}
+
+.menu-title {
+    font-size: 30rpx;
+}
+
+.menu-item {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    font-size: 28rpx;
+    line-height: 6vh;
+}
+
+.fram-line {
+    font-size: 20rpx;
+}
+
+.footer_title {
+    margin-top: 90vh;
+    text-align: center;
+    font-size: 12px;
+}

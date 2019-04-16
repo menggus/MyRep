@@ -1,0 +1,47 @@
+/* pages/predict/predict.wxss */
+.globe_scroll{
+  background-color: #e6e6e6;
+}
+.form_title{
+  height: 5vh;
+  padding-left: 20rpx;
+  font-size: 32rpx;
+  line-height: 5vh;
+  margin-bottom: -1vh;
+}
+.content_view{
+  margin-top: 1vh;
+  height: 7vh;
+  padding-left: 20rpx;
+  background-color: #fff;
+  font-size: 28rpx;
+  line-height: 7vh;
+}
+.content_view_1{
+  height: 14vh;
+}
+.content_view_2{
+  height: 21vh;
+}
+.line_view{
+  height: 7vh;
+  line-height: 7vh;
+}
+.province_mar{
+  margin-left: 200rpx;
+}
+.diviline{
+  background: #E0E3DA;
+  width: 95%;
+  height: 0.8px;
+}
+
+.submit{
+  margin-top: 2vh;
+}
+
+text{
+  margin-left: 20rpx;
+}
+
+

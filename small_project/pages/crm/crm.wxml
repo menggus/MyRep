@@ -1,0 +1,25 @@
+<!--pages/crm/crm.wxml-->
+<view class='line_view'></view>
+
+<view class='content-menu'>
+  <text class='menu-title'>销售管理</text>
+
+  <view class='menu-item'>
+      <text bindtap='tointention'>意向储备</text>
+      <text class='fram-line'>|</text>
+      <text bindtap='topredict'>合同预测</text>
+      <text class='fram-line'>|</text>
+      <text>汇款预测</text>
+  </view>
+
+</view>
+<view class='line_view'></view>
+
+
+<view class='footer_title'>
+  <text>联系我们</text>
+  <text>\t|\t</text>
+  <text>意见反馈</text>
+</view>
+
+
