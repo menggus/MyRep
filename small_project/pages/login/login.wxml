@@ -1,0 +1,23 @@
+<!--pages/login/login.wxml-->
+<view><image class='login_image1' src='/pages/static/image/login.png'></image></view>
+<!-- <view><image class='paid_shop' src='/pages/static/image/login.png'></image></view> -->
+<form class='container' bindsubmit='login'>
+  <view class='line_view'>
+    <label>账号:</label>
+    <input name='username' bindfocus='removetip' bindblur='check_username'></input>
+    
+  </view>
+
+  <view class='diviline'></view>
+
+  <view class='line_view'>
+    <label>密码:</label>
+    <input password='true' name='password' bindfocus='removetip' bindblur='check_password'></input>
+    
+  </view>
+
+  <view class='diviline'></view>
+  <view class='errormsg'><text wx:if="{{errormsg}}">{{errormsg}}</text></view>
+
+  <button type='primary' form-type='submit'>登录</button>
+</form>

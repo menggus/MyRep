@@ -1,0 +1,16 @@
+{
+    "pages": [
+        "pages/login/login",
+        "pages/intention/intention",
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/crm/crm",
+        "pages/predict/predict"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#217346",
+        "navigationBarTitleText": "CRM系统",
+        "navigationBarTextStyle": "white"
+    }
+}

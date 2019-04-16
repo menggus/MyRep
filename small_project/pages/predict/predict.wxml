@@ -1,0 +1,39 @@
+<!--pages/predict/predict.wxml-->
+<!-- <scroll-view class='globe_scroll'> -->
+<view class='globe_scroll'>
+  <form>
+    <!-- <view class='form_title'>预测合同信息</view> -->
+    <view class='content_view content_view_2'>
+      <view>订单编号:<text>{{order_id}}</text> </view>
+      <view class='diviline'></view>
+      <view>客户名称:<text>{{customer}}</text></view>
+      <view class='diviline'></view>
+      <view>
+        区域:<text>{{area_id}} </text> 
+        <text class='province_mar'>省份:</text><text>{{province_id}}</text>
+      </view>
+    </view>
+    
+    <view class='content_view content_view_2'>
+      <view>市场类型:<text>{{marking_type_id}}</text></view>
+      <view class='diviline'></view>
+      <view>采购形式:<text>{{purchase_form}}</text></view>
+      <view class='diviline'></view>
+      <view>所属产品线:<text>{{product_line_type}}</text></view>
+    </view>
+    
+    <view class='content_view  line_view'>销售经理：{{manager}}</view>
+    
+    <view class='content_view content_view_1'>合同金额 (元)
+      <view class='diviline'></view>
+      <input class='line_view' placeholder='请输入合同金额'></input>
+    </view>
+    <view class='content_view content_view_1'>预计合同签回日期(格式: 1991/3/25)
+      <view class='diviline'></view>
+      <input class='line_view' placeholder='请输入签回日期'></input>
+    </view>
+    <button class='submit' type='primary'>提交</button>
+  </form>
+</view>
+<!-- </scroll-view> -->
+

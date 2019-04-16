@@ -1,0 +1,123 @@
+<!--pages/intention/intention.wxml-->
+<view class='page-intention'>
+    <view class='content'>
+        <view class='process-info'>
+            <view class='item' style='background-color:{{color1}};'>1</view>
+            <view class='item' style='background-color:{{color2}};'>2</view>
+            <view class='item' style='background-color:{{color3}};'>3</view>
+        </view>
+        <view class='process-info progress-info-title'>
+            <text class='item-title' style='color:{{font1}};'>项目信息</text>
+            <text class='item-title' style='color:{{font2}};'>客户信息</text>
+            <text class='item-title' style='color:{{font3}};'>项目评估</text>
+        </view>
+    </view>
+
+    <view class='diviline'></view>
+
+    <view class='view-sw'>
+        <swiper class='swiper-content' current='{{current_swiper}}'>
+            
+            <swiper-item class='swiper-item' catchtouchmove="stopTouchMove">
+                <view class='elem-item'>
+                    <label>区域： </label>
+                    <text class='input-area'></text>
+                </view>
+
+                <view class='elem-item'>
+                    <label>省份： </label>
+                    <text class='input-pro'></text>
+                </view>
+
+                <view class="elem-item">
+                    <view class="">销售经理：</view>
+                    <view class="select">
+                        <picker bindchange="manager_bindPickerChange" value="{{manager_index}}" range="{{manager_array}}">
+                            <view class="">{{manager_array[manager_index]}}</view>
+                        </picker>
+                    </view>
+                </view>
+                <view class='hor-line'></view>
+                <view class="elem-item">
+                    <view class="">项目类型：</view>
+                    <view class="select">
+                        <picker bindchange="project_bingPickerChange" value="{{project_index}}" range="{{project_array}}">
+                            <view class="">{{project_array[project_index]}}</view>
+                        </picker>
+                    </view>
+                </view>
+
+                <view class="elem-item">
+                    <view class="">市场类型：</view>
+                    <view class="select">
+                        <picker bindchange="market_bindPickerChange" value="{{market_index}}" range="{{market_array}}">
+                            <view class="">{{market_array[market_index]}}</view>
+                        </picker>
+                    </view>
+                </view>
+                <view class="elem-item">
+                    <view class="">采购形式：</view>
+                    <view class="select">
+                        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                            <view class="">{{array[index]}}</view>
+                        </picker>
+                    </view>
+                </view>
+                <view class="elem-item">
+                    <view class="">客户名称：</view>
+                    <view class="select">
+                        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                            <view class="">{{array[index]}}</view>
+                        </picker>
+                    </view>
+                </view>
+
+                <view class='hor-line'></view>
+                
+                <view class="elem-item">
+                    <view class="">合作内容：</view>
+                </view>
+                <view class="text-item">
+                    <textarea class='textarea-sty' auto-height placeholder='请输入合作内容' />
+                </view>
+            </swiper-item>
+
+            <swiper-item class='swiper-item' catchtouchmove="stopTouchMove">
+                
+                <view class="elem-item">
+                    <view class="">日期：</view>
+                    <view class="select">
+                        <picker mode="date" value="{{date}}" start="2019-04-01" end="2050-01-01" bindchange="bindDateChange">
+                            <view class="weui-input">{{date}}</view>
+                        </picker>
+                    </view>
+                </view>
+
+            </swiper-item>
+
+            <swiper-item class='swiper-item' catchtouchmove="stopTouchMove">
+                
+
+                <view class="elem-item">
+                    <view class="">日期：</view>
+                    <view class="select">
+                        <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                            <view class="weui-input">{{date}}</view>
+                        </picker>
+                    </view>
+                </view>
+
+            </swiper-item>
+
+        
+
+        </swiper>
+        <view class='diviline'></view>
+        <view class='double-btn'>
+            <button class='btn-sty' bindtap='pre_swiper'>上一页</button>
+            <button class='btn-sty' bindtap='next_swiper'>下一页</button>
+        </view>
+        <button class='submit-btn' bindtap='submit_form_btn'>提交</button>
+    </view>
+
+</view>
