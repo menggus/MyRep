@@ -1,0 +1,10 @@
+{
+  "book_url": "https://www.amazon.cn/dp/B07Q9QR58F/ref=sr_1_48?qid=1556370330&s=books&sr=1-48",
+  "price": "￥20.80",
+  "author": "王江涛 (作者)",
+  "book_name": "（2020）考研英语高分写作",
+  "press": "群言出版社; 第1版 (2019年3月1日)"
+}
+
+
+'<ul\s*?class="a-unordered-list a-horizontal a-size-small">(.*?)</ul>'
