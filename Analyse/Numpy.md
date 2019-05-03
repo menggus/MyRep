@@ -61,7 +61,7 @@
     # 把数组转化为1维数组  已知数组 b:（3,4）
     b.reshape(12,)
     
-    # b.flatten()
+    # b.flatten()  转化为一维数组
     b.flatten()
     ```
 
@@ -76,10 +76,66 @@
     a/1
     # 数组与数值进行加减乘除，数组的每一个值与该数值进行运算
     
-    # 数组与数组进行运算
+    # 与数组进行计算
+    #####  Numpy中的   数组a*数组b为  元素乘法，并不是矩阵乘法
+    #  *  元素乘法
+    import numpy as np
     
-    # 同维度  数组的行列数一样
-    # 加减运算 乘除运算：对应位置运算
+    x = np.array([[1,2],[3,4]], dtype=np.float64)
+    y = np.array([[5,6],[7,8]], dtype=np.float64)
+    
+    # Elementwise sum; both produce the array
+    # [[ 6.0  8.0]
+    #  [10.0 12.0]]
+    print(x + y)
+    print(np.add(x, y))
+    
+    # Elementwise difference; both produce the array
+    # [[-4.0 -4.0]
+    #  [-4.0 -4.0]]
+    print(x - y)
+    print(np.subtract(x, y))
+    
+    # Elementwise product; both produce the array
+    # [[ 5.0 12.0]
+    #  [21.0 32.0]]
+    print(x * y)
+    print(np.multiply(x, y))
+    
+    # Elementwise division; both produce the array
+    # [[ 0.2         0.33333333]
+    #  [ 0.42857143  0.5       ]]
+    print(x / y)
+    print(np.divide(x, y))
+    
+    # Elementwise square root; produces the array
+    # [[ 1.          1.41421356]
+    #  [ 1.73205081  2.        ]]
+    print(np.sqrt(x))
+    
+    
+    # 矩阵的乘法 a.dot(b)
+    import numpy as np
+    
+    x = np.array([[1,2],[3,4]])
+    y = np.array([[5,6],[7,8]])
+    
+    v = np.array([9,10])
+    w = np.array([11, 12])
+    
+    # Inner product of vectors; both produce 219
+    print(v.dot(w))
+    print(np.dot(v, w))
+    
+    # Matrix / vector product; both produce the rank 1 array [29 67]
+    print(x.dot(v))
+    print(np.dot(x, v))
+    
+    # Matrix / matrix product; both produce the rank 2 array
+    # [[19 22]
+    #  [43 50]]
+    print(x.dot(y))
+    print(np.dot(x, y))
     ```
 
 
@@ -237,4 +293,61 @@
     a.std(axis=None)
     ```
 
+-   对于缺失值的填充
+
+-   数组的拼接
+
+    ```python
+    # 横向拼接
+    # 如：有数组t1，t2；对两个数组进行拼接
+    np.hstack((t1, t2))  
     
+    # 特别注意：传入参数是以元组形式（t1，t2）
+    
+    # 纵向拼接
+    np.vstack((t1, t2))
+    ```
+
+-   数组的行列交换
+
+    ```python
+    # 行列交换，两个数组的每一列代表字段不一样，需要对其中一个数组进行列的交换，与另一数组的列一样
+    
+    # 数组t的第2列和第3列进行交换
+    t[:,[1,2] = t[:,[2,1]]
+      
+    # 数组t的第2行与第3行进行交换
+    t[[1,2]] = t[[2,1]]
+    
+    ```
+
+-   快捷创建简单数组
+
+    ```python
+    # 创建值全部为0 的数组
+    np.zeros((1,2))  # 创建1行2列的值全为0的数组
+    # 创建值全部为1 的数组
+    np.ones((1,2))  # 创建1行2列的值全为1的数组
+    # 创建对角数组
+    np.eye(3)  # 创建3行3列的值全为1数组
+    
+    # 以一个a数组为模板创建同样形状的空数组
+    np.empty_like(a)
+    
+    # 求数组a最大值，最小值
+    np.argmax(a, axis=0)  # axis为轴
+    np.argmix(a, axis=1)  # axis为轴
+    ```
+
+-   Numpy随机数组的生成
+
+    ![1556889824546](C:\Users\tao_cp\AppData\Roaming\Typora\typora-user-images\1556889824546.png)
+
+### Numpy中关于赋值，视图操作注意点
+
+-   a = b  完全不复制，a和b相互影响，改变a，b跟着变，改变b，a跟着变
+-   a = b[:]  视图操作，会创建新的对象a，但是a的数据完全由b保管，数据变化是一致的，也相互影响
+-   a = b.copy() 复制，a与b不相互影响，类似于深拷贝
+
+
+
