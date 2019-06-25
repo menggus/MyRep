@@ -1,7 +1,7 @@
 import itchat
 
 """
-    登录微信,并爬去好友信息
+    登录微信,获取好友信息
 """
 
 class Wechat:
@@ -31,9 +31,9 @@ class Wechat:
         info["Rename"] = i.get("RemarkName")  # 备注昵称
         info["Sex"] = i.get("Sex")  # 性别
         info["Province"] = i.get("Province")  # 省份
-        info["City"] = i.get("City")  # 城市
-        info["Signature"] = i.get("Signature")  # 个性签名
-        info["AttrStatus"] = i.get("AttrStatus")  # 点赞数
+        info["City"] = i.get("City")  # 城市AttrStatus
+        info["AttrStatus"] = i.get("AttrStatus")  # 个性签名
+        info["Signature"] = " ".join(i.get("Signature")) if "," in i.get("Signature") else i.get("Signature")# 点赞数
 
         return info
 
