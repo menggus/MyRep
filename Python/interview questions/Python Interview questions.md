@@ -478,191 +478,336 @@
 
 34. 如何安装第三方模块？以及用过哪些第三方模块？
 
-35. 
+     ```python
+     # pip 或者 使用Anconda环境, 通过conda命令安装
+     # requests
+     # pymysql
+     # django
+     # scrapy
+     # numpy, pandas 数据处理模块
+     
+     ```
+
+35. 至少列举8个常用模块都有那些？
+
+     ```python
+     # 第三方模块
+     # django 模块
+     # pymysql 数据库通讯模块
+     # requests 网络通讯模块
+     # numpy, pandas 数据处理模块
+     
+     # 标准模块
+     # re 正则匹配
+     # random 随机数
+     # time  时间访问转换模块
+     # math 数学模块
+     # os 操作系统接口
+     # json 模块
+     ```
+
+36. re的match和search区别？
+
+     ```python
+     # re.match(pattern, string, flags=0)
+     如果 string 开始的0或者多个字符匹配到了正则表达式样式，就返回一个相应的 匹配对象 。 如果没有匹配，就返回 None ；注意它跟零长度匹配是不同的;
+     # re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，函数返回None；
+     
+     # re.search(pattern, string, flags=0)
+     扫描整个 字符串 找到匹配样式的第一个位置，并返回一个相应的 匹配对象。如果没有匹配，就返回一个 None ； 注意这和找到一个零长度匹配是不同的;
+     # re.search匹配整个字符串，直到找到一个匹配;
+     ```
+
+37. 什么是正则的贪婪匹配？
+
+     ```python
+     # 贪婪匹配
+     在匹配正确的情况下,尽可能匹配更多;
+     主要在 . * + {}等通, 由于匹配的字符非常多,特别实在html标签语言的匹配过程中容易发生贪婪匹配
+     例子:<p><ul><li><p></p></li><li><p></p></li></ul></p>
+     贪婪匹配: <p>.*</p>  ,会匹配上述的全部
+     非贪婪: <p>.*</p>  , 只会匹配  <p><ul><li><p></p> 满足匹配条件即会停止匹配
+     # 非贪婪
+     在匹配正确的情况下,尽可能匹配更少;
+     ```
+
+38. 求结果：a. 	[ i % 2 for i in range(10) ]   b. ( i % 2 for i in range(10) )
+
+     ```python
+     # [ i % 2 for i in range(10) ]
+     [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+     
+     #  ( i % 2 for i in range(10) ) 生成器对象
+     generator
+     ```
+
+39. 求结果：	a. 	1 or 2 	b. 1 and 2	c. 1 < (2==2)	d. 1 < 2 == 2
+
+     ```python
+     # 1 or 2
+     1
+     # 1 and 2
+     2
+     # 1 < (2 == 2)
+     False
+     # 1 < 2 == 2
+     True
+     ```
+
+40. def 	func(a,b=[ ]) 这种写法有什么坑？
+
+     ```python
+     # 当b关键字参数不传入时, 变量b会指向同一列表对象,这样会导致,每次调用func时, 对b的操作会影响其他调用者;
+     # 可理解为,函数的调用者,在不传入变量b时,会共享列表变量
+     ```
+
+41. 如何实现 “1,2,3” 	变成 [‘1’,’2’,’3’] 	?
+
+     ```python
+     "1,2,3".split(",")
+     ```
+
+42. 如何实现[‘1’,’2’,’3’]变成[1,2,3] 	?
+
+     ```python
+     [int(i) for i in ["1", "2", "3"]]
+     ```
+
+43. 比较： a 	= [1,2,3] 和 b 	= [(1),(2),(3) ] 以及 c 	= [(1,),(2,),(3,) ] 的区别？
+
+     ```python
+     # a 与 b 值一样
+     # c 列表中每个元素均是一个元组
+     ```
+
+44. 如何用一行代码生成[1,4,9,16,25,36,49,64,81,100] 	?
+
+     ```python
+     [i**2 for i in range(1,11)]
+     ```
+
+45. 一行代码实现删除列表中重复的值 	?
+
+     ```python
+     list(set(alist))
+     ```
+
+46. 如何在函数中设置一个全局变量 	?
+
+     ```python
+     global 变量
+     ```
+
+47. logging模块的作用？以及应用场景？
+
+     ```python
+     # logging 日志模块
+     # 可按追踪级别进行输出日志信息,可用于应用程序执行的日志记录, 有利于问题源头的查找;
+     ```
+
+48. 请用代码简答实现stack 	。
+
+     ```python
+     # 列表实现堆栈: 后进先出
+     class Stack:
+         """堆栈"""
+         def __init__(self)
+         	self.stack = []
+         def push(self, elem):
+             """进栈"""
+         	self.stack.append(elem)
+         def pop(self):
+             """出栈"""
+         	if self.isempty():
+                 return "-1"
+             self.stack.pop()
+         def isempty(self):
+             """判空"""
+         	return bool(self.stack)
+         def top(self):
+             """取出最新元素"""
+             return self.stack[-1]
+     # 链表实现: 待补充
+     ```
 
-36. 至少列举8个常用模块都有那些？
+49. 常用字符串格式化哪几种？
 
-37. 
+     ```python
+     # "%s, %d" % (a, b) 旧式 格式化字符串: 可使用格式说明符 
+     
+     # f"{a},{b}"  字面值字符串: 可嵌入表达式 (Python 3.6+版本使用)
+     
+     # "{},{}".format(a,b) 新式 格式化字符串: 可使用格式说明符
+     # "{name},{age}".format(name=a,age=b) 新式 格式化字符串: 可使用格式说明符
+     
+     # 模板字符串: 当字符串由用户提供时, 为了安全考虑使用该方式
+     In [73]: from string import Template 
+         ...: a = Template("hey, $name!") 
+         ...: a.substitute(name = "Bob")                                             
+     Out[73]: 'hey, Bob!'
+     ```
 
-38. re的match和search区别？
+50. 简述 生成器、迭代器、可迭代对象 	以及应用场景？
 
-39. 
+      ```python
+     # https://www.jianshu.com/p/411352426841
+     # 可迭代对象
+     实现了__iter__方法的对象,是可迭代对象
+     # 迭代器: 实现迭代器协议
+     实现了__iter__, __next__方法的对象, __iter__()返回迭代器本身
+     1.所有的iterable都可以通过内置函数iter()转换为iterator
+     2.迭代器的优点:省内存.它是一种通过延时创建的方式生成一个序列,只有在需要的时候才被创建.
+     3.迭代器对象从集合的第一个元素开始访问,直到所有的元素被访问结束,只能往前不能后退
+     4.迭代器有两个基本的方法:iter,text方法
+     5.内置函数iter(),next(),本质上都是用的对象的iter()和next()方法.
+     
+     # 生成器
+     生成器本质上是一种迭代器,其内部也实现了__iter__和__next__方法;
+     一般定义生成器是通过 yield 关键字, 这里 yield 可理解为一种状态记录, 当获取产生元素后会进入挂起状态,当唤醒时会继续执行并唤醒下一个元素.
+      ```
 
-40. 什么是正则的贪婪匹配？
+51. 用Python实现一个二分查找的函数。
 
-41. 
+     ```python
+     # 二分查找-递归实现 (查找序列有序)
+     alsit = sorted(alist)
+     def binaryfind(alist, elem, index=0):
+         if len(alist) <= 0:
+             return -1
+         num = len(alist)//2
+         if alist[num] == elem:
+             return index+num
+         if alist[num] < elem:
+             return binaryfind(alist[num+1:], elem, index=num+1)
+         if alist[num] > elem:
+             return binaryfind(alist[:num], elem, index=0)
+         return -1, f"{elem}未找到"
+     
+     #
+         
+     ```
 
-42. 求结果：  	a. 	[ i % 2 for i in range(10) ]  	b. ( i % 2 for i in range(10) )
+     
 
-43. 
+     
 
-44. 求结果：  	a. 	1 or 2  	b. 1 and 2  	c. 1 < (2==2)  	d. 1 < 2 == 2
+52. 
 
-45. 
+53. 谈谈你对闭包的理解？
 
-46. def 	func(a,b=[]) 这种写法有什么坑？
+54. 
 
-47. 
+55. os和sys模块的作用？
 
-48. 如何实现 “1,2,3” 	变成 [‘1’,’2’,’3’] 	?
+56. 
 
-49. 
+57. 如何生成一个随机数？
 
-50. 如何实现[‘1’,’2’,’3’]变成[1,2,3] 	?
+58. 
 
-51. 
+59. 如何使用python删除一个文件？
 
-52. 比较： a 	= [1,2,3] 和 b 	= [(1),(2),(3) ] 以及 b 	= [(1,),(2,),(3,) ] 的区别？
+60. 
 
-53. 
+61. 谈谈你对面向对象的理解？
 
-54. 如何用一行代码生成[1,4,9,16,25,36,49,64,81,100] 	?
+62. 
 
-55. 
+63. Python面向对象中的继承有什么特点？
 
-56. 一行代码实现删除列表中重复的值 	?
+64. 
 
-57. 
+65. 面向对象深度优先和广度优先是什么？
 
-58. 如何在函数中设置一个全局变量 	?
+66. 
 
-59. 
+67. 面向对象中super的作用？
 
-60. logging模块的作用？以及应用场景？
+68. 
 
-61. 
+69. 是否使用过functools中的函数？其作用是什么？
 
-62. 请用代码简答实现stack 	。
+70. 
 
-63. 
+71. 列举面向对象中带爽下划线的特殊方法，如：__new__、__init__
 
-64. 常用字符串格式化哪几种？
+72. 
 
-65. 
+73. 如何判断是函数还是方法？
 
-66. 简述 生成器、迭代器、可迭代对象 	以及应用场景？
+74. 
 
-67. 
+75. 静态方法和类方法区别？
 
-68. 用Python实现一个二分查找的函数。
+76. 
 
-69. 
+77. 列举面向对象中的特殊成员以及应用场景
 
-70. 谈谈你对闭包的理解？
+78. 
 
-71. 
+79. 1、2、3、4、5 	能组成多少个互不相同且无重复的三位数
 
-72. os和sys模块的作用？
+80. 
 
-73. 
+81. 什么是反射？以及应用场景？
 
-74. 如何生成一个随机数？
+82. 
 
-75. 
+83. metaclass作用？以及应用场景？
 
-76. 如何使用python删除一个文件？
+84. 
 
-77. 
+85. 用尽量多的方法实现单例模式。
 
-78. 谈谈你对面向对象的理解？
+86. 
 
-79. 
+87. 装饰器的写法以及应用场景。
 
-80. Python面向对象中的继承有什么特点？
+88. 
 
-81. 
+89. 异常处理写法以及如何主动跑出异常（应用场景）
 
-82. 面向对象深度优先和广度优先是什么？
+90. 
 
-83. 
+91. 什么是面向对象的mro
 
-84. 面向对象中super的作用？
+92. 
 
-85. 
+93. isinstance作用以及应用场景？
 
-86. 是否使用过functools中的函数？其作用是什么？
+94. 
 
-87. 
+95. 写代码并实现：
+        Given 	an array of integers, return indices of the two numbers such that 	they add up to a specific target.You may assume that each input 	would 
+        have exactly one solution, and you may not use the 	same element twice.
+        Example: 
+          	  	  	  	  	Given nums = [2, 7, 11, 15], target = 9,
+          	  	  	  	  	  Because 	nums[0] + nums[1] = 2 + 7 = 9, 
+          	  	  	  	  	 return 	[0, 1]
 
-88. 列举面向对象中带爽下划线的特殊方法，如：__new__、__init__
+96. 
 
-89. 
+97. json序列化时，可以处理的数据类型有哪些？如何定制支持datetime类型？
 
-90. 如何判断是函数还是方法？
+98. 
 
-91. 
+99. json序列化时，默认遇到中文会转换成unicode，如果想要保留中文怎么办？
 
-92. 静态方法和类方法区别？
+100. 
 
-93. 
+101. 什么是断言？应用场景？
 
-94. 列举面向对象中的特殊成员以及应用场景
+102. 
 
-95. 
+103. 有用过with 	statement吗？它的好处是什么？
 
-96. 1、2、3、4、5 	能组成多少个互不相同且无重复的三位数
+104. 
 
-97. 
+105. 使用代码实现查看列举目录下的所有文件。
 
-98. 什么是反射？以及应用场景？
+106. 
 
-99. 
-
-100. metaclass作用？以及应用场景？
-
-101. 
-
-102. 用尽量多的方法实现单例模式。
-
-103. 
-
-104. 装饰器的写法以及应用场景。
-
-105. 
-
-106. 异常处理写法以及如何主动跑出异常（应用场景）
-
-107. 
-
-108. 什么是面向对象的mro
-
-109. 
-
-110. isinstance作用以及应用场景？
-
-111. 
-
-112. 写代码并实现：
-       Given 	an array of integers, return indices of the two numbers such that 	they add up to a specific target.You may assume that each input 	would 
-       have exactly one solution, and you may not use the 	same element twice.
-       Example: 
-         	  	  	  	  	Given nums = [2, 7, 11, 15], target = 9,
-         	  	  	  	  	  Because 	nums[0] + nums[1] = 2 + 7 = 9, 
-         	  	  	  	  	 return 	[0, 1]
-
-113. 
-
-114. json序列化时，可以处理的数据类型有哪些？如何定制支持datetime类型？
-
-115. 
-
-116. json序列化时，默认遇到中文会转换成unicode，如果想要保留中文怎么办？
-
-117. 
-
-118. 什么是断言？应用场景？
-
-119. 
-
-120. 有用过with 	statement吗？它的好处是什么？
-
-121. 
-
-122. 使用代码实现查看列举目录下的所有文件。
-
-123. 
-
-124. 简述 yield和yield 	from关键字。
+107. 简述 yield和yield 	from关键字。
 
  **第二部分 网络编程和并发（****34****题）**
 
