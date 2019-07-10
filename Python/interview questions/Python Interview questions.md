@@ -429,265 +429,385 @@
      函数m会变为3*x,执行为6,所以结果全为6
      ```
 
+31. 列举常见的内置函数？
+
+     ```python
+     # https://docs.python.org/zh-cn/3/library/functions.html
+     int(), str(), list(), dict(), tuple()
+     bin(), oct(), hex()
+     format(), len(), bool(), map()
+     ```
+
+32. filter、map、reduce的作用？
+
+     ```python
+     # filter(function, Iterable) : 过滤序列; function:判别函数, Iterable:可迭代对象; return: 迭代器
+     In [21]: list(filter(lambda x: x % 2 == 0, range(10)))                          
+     Out[21]: [0, 2, 4, 6, 8]
+         
+     # map(function, Iterable): 将Iterable映射到function;   return: 迭代器
+     In [23]: list(map(lambda x: x**2,range(10)))                                    
+     Out[23]: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+     In [26]: list(map(lambda x, y: x*y,range(10), range(5)))  # 以最短迭代器耗尽为止            
+     Out[26]: [0, 1, 4, 9, 16]
+     
+     # reduce(function, Iterable): 累积函数结果; function:有两个参数  return: 计算结果
+     In [38]: import functools  # python3中reduce在functools下                                 In [39]: functools.reduce(lambda x, y: x+y, range(5))                           
+     Out[39]: 10
+     In [41]: functools.reduce(lambda x, y: x*y, range(1,5))                         
+     Out[41]: 24
+     ```
+
+33. 一行代码实现9*9乘法表
+
+     ```python
+     In [62]: print("\n".join("\t".join(["{}*{}={}".format(y,x,x*y) for y in range(1,
+         ...:  x+1)]) for x in range(1, 10)))                                        
+     1*1=1
+     1*2=2	2*2=4
+     1*3=3	2*3=6	3*3=9
+     1*4=4	2*4=8	3*4=12	4*4=16
+     1*5=5	2*5=10	3*5=15	4*5=20	5*5=25
+     1*6=6	2*6=12	3*6=18	4*6=24	5*6=30	6*6=36
+     1*7=7	2*7=14	3*7=21	4*7=28	5*7=35	6*7=42	7*7=49
+     1*8=8	2*8=16	3*8=24	4*8=32	5*8=40	6*8=48	7*8=56	8*8=64
+     1*9=9	2*9=18	3*9=27	4*9=36	5*9=45	6*9=54	7*9=63	8*9=72	9*9=81
+     ```
+
      
 
-31. 
+34. 如何安装第三方模块？以及用过哪些第三方模块？
 
-32. 
+     ```python
+     # pip 或者 使用Anconda环境, 通过conda命令安装
+     # requests
+     # pymysql
+     # django
+     # scrapy
+     # numpy, pandas 数据处理模块
+     
+     ```
 
-33. 
+35. 至少列举8个常用模块都有那些？
 
-34. 
+     ```python
+     # 第三方模块
+     # django 模块
+     # pymysql 数据库通讯模块
+     # requests 网络通讯模块
+     # numpy, pandas 数据处理模块
+     
+     # 标准模块
+     # re 正则匹配
+     # random 随机数
+     # time  时间访问转换模块
+     # math 数学模块
+     # os 操作系统接口
+     # json 模块
+     ```
 
-35. 
+36. re的match和search区别？
 
-36. 
+     ```python
+     # re.match(pattern, string, flags=0)
+     如果 string 开始的0或者多个字符匹配到了正则表达式样式，就返回一个相应的 匹配对象 。 如果没有匹配，就返回 None ；注意它跟零长度匹配是不同的;
+     # re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，函数返回None；
+     
+     # re.search(pattern, string, flags=0)
+     扫描整个 字符串 找到匹配样式的第一个位置，并返回一个相应的 匹配对象。如果没有匹配，就返回一个 None ； 注意这和找到一个零长度匹配是不同的;
+     # re.search匹配整个字符串，直到找到一个匹配;
+     ```
 
-37. 
+37. 什么是正则的贪婪匹配？
 
-38. 
+     ```python
+     # 贪婪匹配
+     在匹配正确的情况下,尽可能匹配更多;
+     主要在 . * + {}等通, 由于匹配的字符非常多,特别实在html标签语言的匹配过程中容易发生贪婪匹配
+     例子:<p><ul><li><p></p></li><li><p></p></li></ul></p>
+     贪婪匹配: <p>.*</p>  ,会匹配上述的全部
+     非贪婪: <p>.*</p>  , 只会匹配  <p><ul><li><p></p> 满足匹配条件即会停止匹配
+     # 非贪婪
+     在匹配正确的情况下,尽可能匹配更少;
+     ```
 
-39. 
+38. 求结果：a. 	[ i % 2 for i in range(10) ]   b. ( i % 2 for i in range(10) )
 
-40. 
+     ```python
+     # [ i % 2 for i in range(10) ]
+     [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+     
+     #  ( i % 2 for i in range(10) ) 生成器对象
+     generator
+     ```
 
-41. 
+39. 求结果：	a. 	1 or 2 	b. 1 and 2	c. 1 < (2==2)	d. 1 < 2 == 2
 
-42. 
+     ```python
+     # 1 or 2
+     1
+     # 1 and 2
+     2
+     # 1 < (2 == 2)
+     False
+     # 1 < 2 == 2
+     True
+     ```
 
-43. 
+40. def 	func(a,b=[ ]) 这种写法有什么坑？
 
-44. 
+     ```python
+     # 当b关键字参数不传入时, 变量b会指向同一列表对象,这样会导致,每次调用func时, 对b的操作会影响其他调用者;
+     # 可理解为,函数的调用者,在不传入变量b时,会共享列表变量
+     ```
 
-45. 
+41. 如何实现 “1,2,3” 	变成 [‘1’,’2’,’3’] 	?
 
-46. 
+     ```python
+     "1,2,3".split(",")
+     ```
 
-47. 
+42. 如何实现[‘1’,’2’,’3’]变成[1,2,3] 	?
 
-48. 
+     ```python
+     [int(i) for i in ["1", "2", "3"]]
+     ```
 
-49. 
+43. 比较： a 	= [1,2,3] 和 b 	= [(1),(2),(3) ] 以及 c 	= [(1,),(2,),(3,) ] 的区别？
 
-50. 
+     ```python
+     # a 与 b 值一样
+     # c 列表中每个元素均是一个元组
+     ```
 
-51. 
+44. 如何用一行代码生成[1,4,9,16,25,36,49,64,81,100] 	?
+
+     ```python
+     [i**2 for i in range(1,11)]
+     ```
+
+45. 一行代码实现删除列表中重复的值 	?
+
+     ```python
+     list(set(alist))
+     ```
+
+46. 如何在函数中设置一个全局变量 	?
+
+     ```python
+     global 变量
+     ```
+
+47. logging模块的作用？以及应用场景？
+
+     ```python
+     # logging 日志模块
+     # 可按追踪级别进行输出日志信息,可用于应用程序执行的日志记录, 有利于问题源头的查找;
+     ```
+
+48. 请用代码简答实现stack 	。
+
+     ```python
+     # 列表实现堆栈: 后进先出
+     class Stack:
+         """堆栈"""
+         def __init__(self)
+         	self.stack = []
+         def push(self, elem):
+             """进栈"""
+         	self.stack.append(elem)
+         def pop(self):
+             """出栈"""
+         	if self.isempty():
+                 return "-1"
+             self.stack.pop()
+         def isempty(self):
+             """判空"""
+         	return bool(self.stack)
+         def top(self):
+             """取出最新元素"""
+             return self.stack[-1]
+     # 链表实现: 待补充
+     ```
+
+49. 常用字符串格式化哪几种？
+
+     ```python
+     # "%s, %d" % (a, b) 旧式 格式化字符串: 可使用格式说明符 
+     
+     # f"{a},{b}"  字面值字符串: 可嵌入表达式 (Python 3.6+版本使用)
+     
+     # "{},{}".format(a,b) 新式 格式化字符串: 可使用格式说明符
+     # "{name},{age}".format(name=a,age=b) 新式 格式化字符串: 可使用格式说明符
+     
+     # 模板字符串: 当字符串由用户提供时, 为了安全考虑使用该方式
+     In [73]: from string import Template 
+         ...: a = Template("hey, $name!") 
+         ...: a.substitute(name = "Bob")                                             
+     Out[73]: 'hey, Bob!'
+     ```
+
+50. 简述 生成器、迭代器、可迭代对象 	以及应用场景？
+
+      ```python
+     # https://www.jianshu.com/p/411352426841
+     # 可迭代对象
+     实现了__iter__方法的对象,是可迭代对象
+     # 迭代器: 实现迭代器协议
+     实现了__iter__, __next__方法的对象, __iter__()返回迭代器本身
+     1.所有的iterable都可以通过内置函数iter()转换为iterator
+     2.迭代器的优点:省内存.它是一种通过延时创建的方式生成一个序列,只有在需要的时候才被创建.
+     3.迭代器对象从集合的第一个元素开始访问,直到所有的元素被访问结束,只能往前不能后退
+     4.迭代器有两个基本的方法:iter,text方法
+     5.内置函数iter(),next(),本质上都是用的对象的iter()和next()方法.
+     
+     # 生成器
+     生成器本质上是一种迭代器,其内部也实现了__iter__和__next__方法;
+     一般定义生成器是通过 yield 关键字, 这里 yield 可理解为一种状态记录, 当获取产生元素后会进入挂起状态,当唤醒时会继续执行并唤醒下一个元素.
+      ```
+
+51. 用Python实现一个二分查找的函数。
+
+     ```python
+     # 二分查找-递归实现 (查找序列有序)
+     alsit = sorted(alist)
+     def binaryfind(alist, elem, index=0):
+         if len(alist) <= 0:
+             return -1
+         num = len(alist)//2
+         if alist[num] == elem:
+             return index+num
+         if alist[num] < elem:
+             return binaryfind(alist[num+1:], elem, index=num+1)
+         if alist[num] > elem:
+             return binaryfind(alist[:num], elem, index=0)
+         return -1, f"{elem}未找到"
+     
+     #
+         
+     ```
+
+     
+
+     
 
 52. 
 
-53. 
+53. 谈谈你对闭包的理解？
 
 54. 
 
-55. 
+55. os和sys模块的作用？
 
 56. 
 
-57. 
+57. 如何生成一个随机数？
 
-58.  
+58. 
 
-59. 
+59. 如何使用python删除一个文件？
 
-60. 列举常见的内置函数？
+60. 
 
-61. 
+61. 谈谈你对面向对象的理解？
 
-62. filter、map、reduce的作用？
+62. 
 
-63. 
+63. Python面向对象中的继承有什么特点？
 
-64. 一行代码实现9*9乘法表
+64. 
 
-65. 
+65. 面向对象深度优先和广度优先是什么？
 
-66. 如何安装第三方模块？以及用过哪些第三方模块？
+66. 
 
-67. 
+67. 面向对象中super的作用？
 
-68. 至少列举8个常用模块都有那些？
+68. 
 
-69. 
+69. 是否使用过functools中的函数？其作用是什么？
 
-70. re的match和search区别？
+70. 
 
-71. 
+71. 列举面向对象中带爽下划线的特殊方法，如：__new__、__init__
 
-72. 什么是正则的贪婪匹配？
+72. 
 
-73. 
+73. 如何判断是函数还是方法？
 
-74. 求结果：  	a. 	[ i % 2 for i in range(10) ]  	b. ( i % 2 for i in range(10) )
+74. 
 
-75. 
+75. 静态方法和类方法区别？
 
-76. 求结果：  	a. 	1 or 2  	b. 1 and 2  	c. 1 < (2==2)  	d. 1 < 2 == 2
+76. 
 
-77. 
+77. 列举面向对象中的特殊成员以及应用场景
 
-78. def 	func(a,b=[]) 这种写法有什么坑？
+78. 
 
-79. 
+79. 1、2、3、4、5 	能组成多少个互不相同且无重复的三位数
 
-80. 如何实现 “1,2,3” 	变成 [‘1’,’2’,’3’] 	?
+80. 
 
-81. 
+81. 什么是反射？以及应用场景？
 
-82. 如何实现[‘1’,’2’,’3’]变成[1,2,3] 	?
+82. 
 
-83. 
+83. metaclass作用？以及应用场景？
 
-84. 比较： a 	= [1,2,3] 和 b 	= [(1),(2),(3) ] 以及 b 	= [(1,),(2,),(3,) ] 的区别？
+84. 
 
-85. 
+85. 用尽量多的方法实现单例模式。
 
-86. 如何用一行代码生成[1,4,9,16,25,36,49,64,81,100] 	?
+86. 
 
-87. 
+87. 装饰器的写法以及应用场景。
 
-88. 一行代码实现删除列表中重复的值 	?
+88. 
 
-89. 
+89. 异常处理写法以及如何主动跑出异常（应用场景）
 
-90. 如何在函数中设置一个全局变量 	?
+90. 
 
-91. 
+91. 什么是面向对象的mro
 
-92. logging模块的作用？以及应用场景？
+92. 
 
-93. 
+93. isinstance作用以及应用场景？
 
-94. 请用代码简答实现stack 	。
+94. 
 
-95. 
+95. 写代码并实现：
+        Given 	an array of integers, return indices of the two numbers such that 	they add up to a specific target.You may assume that each input 	would 
+        have exactly one solution, and you may not use the 	same element twice.
+        Example: 
+          	  	  	  	  	Given nums = [2, 7, 11, 15], target = 9,
+          	  	  	  	  	  Because 	nums[0] + nums[1] = 2 + 7 = 9, 
+          	  	  	  	  	 return 	[0, 1]
 
-96. 常用字符串格式化哪几种？
+96. 
 
-97. 
+97. json序列化时，可以处理的数据类型有哪些？如何定制支持datetime类型？
 
-98. 简述 生成器、迭代器、可迭代对象 	以及应用场景？
+98. 
 
-99. 
+99. json序列化时，默认遇到中文会转换成unicode，如果想要保留中文怎么办？
 
-100. 用Python实现一个二分查找的函数。
+100. 
 
-101. 
+101. 什么是断言？应用场景？
 
-102. 谈谈你对闭包的理解？
+102. 
 
-103. 
+103. 有用过with 	statement吗？它的好处是什么？
 
-104. os和sys模块的作用？
+104. 
 
-105. 
+105. 使用代码实现查看列举目录下的所有文件。
 
-106. 如何生成一个随机数？
+106. 
 
-107. 
-
-108. 如何使用python删除一个文件？
-
-109. 
-
-110. 谈谈你对面向对象的理解？
-
-111. 
-
-112. Python面向对象中的继承有什么特点？
-
-113. 
-
-114. 面向对象深度优先和广度优先是什么？
-
-115. 
-
-116. 面向对象中super的作用？
-
-117. 
-
-118. 是否使用过functools中的函数？其作用是什么？
-
-119. 
-
-120. 列举面向对象中带爽下划线的特殊方法，如：__new__、__init__
-
-121. 
-
-122. 如何判断是函数还是方法？
-
-123. 
-
-124. 静态方法和类方法区别？
-
-125. 
-
-126. 列举面向对象中的特殊成员以及应用场景
-
-127. 
-
-128. 1、2、3、4、5 	能组成多少个互不相同且无重复的三位数
-
-129. 
-
-130. 什么是反射？以及应用场景？
-
-131. 
-
-132. metaclass作用？以及应用场景？
-
-133. 
-
-134. 用尽量多的方法实现单例模式。
-
-135. 
-
-136. 装饰器的写法以及应用场景。
-
-137. 
-
-138. 异常处理写法以及如何主动跑出异常（应用场景）
-
-139. 
-
-140. 什么是面向对象的mro
-
-141. 
-
-142. isinstance作用以及应用场景？
-
-143. 
-
-144. 写代码并实现：
-      Given 	an array of integers, return indices of the two numbers such that 	they add up to a specific target.You may assume that each input 	would 
-      have exactly one solution, and you may not use the 	same element twice.
-      Example: 
-        	  	  	  	  	Given nums = [2, 7, 11, 15], target = 9,
-        	  	  	  	  	  Because 	nums[0] + nums[1] = 2 + 7 = 9, 
-        	  	  	  	  	 return 	[0, 1]
-
-145. 
-
-146. json序列化时，可以处理的数据类型有哪些？如何定制支持datetime类型？
-
-147. 
-
-148. json序列化时，默认遇到中文会转换成unicode，如果想要保留中文怎么办？
-
-149. 
-
-150. 什么是断言？应用场景？
-
-151. 
-
-152. 有用过with 	statement吗？它的好处是什么？
-
-153. 
-
-154. 使用代码实现查看列举目录下的所有文件。
-
-155. 
-
-156. 简述 yield和yield 	from关键字。
+107. 简述 yield和yield 	from关键字。
 
  **第二部分 网络编程和并发（****34****题）**
 
