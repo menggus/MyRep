@@ -1684,7 +1684,7 @@
 3. 简述数据库设计的三大范式？
 
    ```markdown
-   # 第一范式:   1NF   第一范式就是无重复的域
+   # 第一范式:   1NF   第一范式就是无重复的域,属性不可分
    关系模式R的所有属性都不能再进行分解为更基本的数据单位, 那么R就满足第一范式
    第一范式是关系模式规范化的最低要求
    1. 每一列的属性均不可再进行分解, 满足每一列原子性
@@ -1711,7 +1711,12 @@
    事务管理的操作: insert / update  / delete
    满足了事务的四大条件:
    1. 原子性(不可分割性):  一个事务中的操作要么全部成功, 或者全部失败.  如果事务在过程中出现错误, 会被回滚到事务开始的状态,就像事务未被执行一样.
-   2. 一致性:  在事务开始之前和开始之后, 数据库的完整性没有被破坏.  这表示写入的资料必须完全符合所有预设的规则, 涉及资料的精确度, 串联性以及后续数据库可自发性的完成预定工作( 白狗变黑狗,不能出现斑点狗)
+   2. 一致性(同一事务中的操作,操作着同一状态(一致性)的数据库):  在事务开始之前和开始之后, 数据库的完整性没有被破坏.  这表示写入的资料必须完全符合所有预设的规则, 涉及资料的精确度, 串联性以及后续数据库可自发性的完成预定工作
+   
+   一致性理解: 
+   	1. 读的一致性, 事务过程中数据库的状态一致性,  读的操作均是读的同一状态的数据库;
+   	2. 写的一致性,事务过程中数据库的状态一致性, 写的操作均是写的同一状态的数据库;
+   
    3. 隔离性:  数据库允许多个并发事务同时对其数据进行读写和修改的能力, 隔离性可以防止多个并发事务执行时,由于交叉提交而导致数据不一致.( 隔离 你做你的, 我做我的,互不影响)
    4. 持久性:  事务处理结束后,对数据的修改就是永久的, 即便系统故障也不会丢失.
    
@@ -1725,7 +1730,27 @@
         set autocommit = 1  开启自动提交
    ```
 
-5. 简述数据库设计中一对多和多对多的应用场景？
+5. 事务的隔离级别
+
+   ```markdown
+   # 事务隔离级别: 
+   1. 未提交读:  在事务没有进行提交, 也能读取到事务所进行的操作;    可脏读;
+   	一个事务能读取到其他事务的未提交的操作的结果;
+   2. 已提交读:  事务进行提交后, 才能读取到事务所进行的操作;  不可脏读;
+       一个事务不能读取到其他事务未提交的事务操作结果;  但可能造成该事务读取其他事务操作时,  几秒钟前读取的是一个结果, 几秒之后可能是另外一种结果(因为其他事务提交了, 数据进行了改变);
+   3. 可重复读: 事务进行时的多次读取结果是一样的, 不管其他事务有没有进行提交;
+       一个事务进行执行读取操作,不管读取多少次, 结果都是一样的.
+   4. 可窜行化(seriallizable):  隔离级别设置为serializable时, 一个事务在操作时,  另外一个事务不能进行插入操作, 插入操作会被挂起,  超过一段时间会报错, 如果在时间段内, 操作该表的事务提交, 则该事务也可进行插入操作;  
+   
+   # 锁, InnoDB 使用的是行级锁;
+   当出现死锁时,  会优先回滚获取的最少的锁的事务, 进行锁的释放;
+   
+   # https://www.cnblogs.com/jpfss/p/9450035.html
+   ```
+
+   
+
+6. 简述数据库设计中一对多和多对多的应用场景？
 
    ```markdown
    # 一对多
@@ -1735,174 +1760,281 @@
    一个学生可以选修多个科目, 一个科目可以被多个学生选修;
    ```
 
-6. 如何基于数据库实现商城商品计数器？
+7. 如何基于数据库实现商城商品计数器？
 
-   ```python
-   
+   ```sql
+   -- 设计如下
+   -- 注意: 该表在并发的时候,会存在锁, 而只能串行;
+   create table product (
+       id  tinyint unsigned primary key auto_increment,
+       goods_name varchar(64),
+       count  int unsigned 
+   )
    ```
 
    
 
-14.  	常见SQL（必备）
-     详见武沛齐博客：https://www.cnblogs.com/wupeiqi/articles/5729934.html
-
-     
-     
-8. 简述触发器、函数、视图、存储过程？
+8. 常见SQL（必备）
+   详见武沛齐博客：https://www.cnblogs.com/wupeiqi/articles/5729934.html
 
    
 
-9. MySQL索引种类
+9. 简述触发器、函数、视图、存储过程？
 
-   
+    ```sql
+    # 触发器   https://www.cnblogs.com/zzwlovegfj/archive/2012/07/04/2576989.html
+    触发器: 可理解为当达到某条件时,就会执行操作的一种机制;
+    mysql 触发器: 可监控insert, delete, update等sql语句; 通过监控事件, 事件发生就会自触发, 如果满足条件就执行触发器中的sql语句;
+        DROP TRIGGER IF EXITS  ""
+        CREATE TRIGGER TRIGGER_NAME
+        AFTER/BEFORE  INSERT/UPDATE/DELETE ON TABLE_NAME
+        FOR EACH ROW
+        BEGIN
+        SQLS;   # 可以加上条件判断等;
+        END;
+      
+    # 函数: mysql中内置了许多的函数
+    数值函数
+    Abs(X) //绝对值abs(-10.9) = 10
+    Format(X，D) //格式化千分位数值format(1234567.456, 2) =1,234,567.46
+    Ceil(X) //向上取整ceil(10.1) = 11
+    Floor(X) //向下取整floor (10.1) = 10
+    Round(X) //四舍五入去整
+    Mod(M,N) M%N M MOD N  //求余 10%3=1
+    Pi() //获得圆周率
+    Pow(M,N) //M^N
+    Sqrt(X) //算术平方根
+    Rand() //随机数
+    TRUNCATE(X,D) //截取D位小数
+    
+    时间日期函数
+    Now(),current_timestamp() //当前日期时间
+    Current_date() //当前日期
+    current_time() //当前时间
+    Date(‘yyyy-mm-dd HH:ii:ss’) //获取日期部分
+    Time(‘yyyy-mm-dd HH:ii:ss’) //获取时间部分
+    Date_format("yyyy-mm-dd HH:ii:ss","%D %y %a %d %m %b %j")
+    Unix_timestamp() //获得unix时间戳
+    From_unixtime() //从时间戳获得时间
+    
+    -- 字符串函数
+    ASCII(str) //返回字符串str的最左面字符的ASCII代码值.如果str是空字符串,返回0.如果str是NULL,返回NULL.
+    LENGTH(string ) //string长度，字节
+    CHAR_LENGTH(string) //string的字符个数
+    SUBSTRING(str ,position [,length ]) //从str的position开始,取length个字符
+    REPLACE(str ,search_str ,replace_str) //在str中用replace_str替换search_str
+    INSTR(string ,substring ) //返回substring首次在string中出现的位置
+    CONCAT(string [,... ]) //连接字串
+    CHARSET(str) //返回字串字符集
+    LCASE(string ) //转换成小写
+    LEFT(string ,length) //从string2中的左边起取length个字符
+    LOAD_FILE(file_name) //从文件读取内容
+    LOCATE(substring , string [,start_position ]) //同INSTR,但可指定开始位置
+    LPAD(string ,length ,pad ) //重复用pad加在string开头,直到字串长度为length
+    LTRIM(string ) //去除前端空格
+    REPEAT(string ,count ) //重复count次
+    RPAD(string ,length ,pad) //在str后用pad补充,直到长度为length
+    RTRIM(string ) //去除后端空格
+    STRCMP(string1 ,string2 ) //逐字符比较两字串大小
+    TRIM(string) //去除前后两端的空格
+    
+    -- 流程函数
+    CASE WHEN [condition]THEN result[WHEN [condition]THEN result ...][ELSE result]END 多分支
+    IF(expr1,expr2,expr3) 双分支。
+    
+    -- 聚合函数
+    Count()
+    Sum()
+    Max()
+    Min()
+    Avg()
+    Group_concat()
+    其他常用函数
+    Md5()
+    Default()
+                        
+    -- 视图
+    视图是mysql数据库中为了提高查询效率而创建的虚拟的表,  返回的数据为从基表中查询来的数据, 可理解为视图存储的是sql的查询语句;
+    视图可执行的操作存在一定条件,如update,delete,insert等操作, 需要视图中的行与基础表中的行之间必须存在一对一的关系;
+    优点:
+    1. 简化查询. 数据库本身就是一连串复杂sql查询语句;而当面对视图时,直接从视图查询即可;
+    2. 数据库视图有助于限制特定用户的数据访问. 可以使用数据库视图将非敏感数据仅显示给特定用户组;
+    3. 数据库视图提供额外的安全层. 数据库视图允许创建只读视图, 以展示给特定 用户, 用户只能查询,不能更新;
+    4. 数据库视图启用计算列. 例如一般数据库系统设计中,订单表不会存在有每个订单的总销售额, 如果有则不符合第一范式, 也就是不是好的数据库设计, 而视图可以使用计算列, 也就是订单的单价*数列的列;
+    5. 数据库向后兼容. 例如对数据系统的重构, 可能会更新表结构, 而影响接口的使用,而对于视图来说, 并不需要更新接口, 而只用创建与接口对应的视图即可;
+    缺点:
+    1. 可能存在性能问题, 特别是对于视图嵌套视图;
+    2. 视图是依赖于表的, 当表的结构发生改变, 视图也需要更新;
+    
+    -- 存储过程
+    存储过程就是数据库sql语言层面的代码封装与重用; 类似于接口, 可供外部程序调用,外部通过给定参数,来执行存储过程;
+    
+    ```
 
-10. 索引在什么情况下遵循最左前缀的规则？
+10. MySQL索引种类
 
     
 
-11. 主键和外键的区别？
+11. 索引在什么情况下遵循最左前缀的规则？
 
     
 
-12. MySQL常见的函数？
+12. 主键和外键的区别？
 
     
 
-13. 列举 创建索引但是无法命中索引的8种情况。
+13. MySQL常见的函数？
 
     
 
-14. 如何开启慢日志查询？
+14. 列举 创建索引但是无法命中索引的8种情况。
 
     
 
-15. 数据库导入导出命令（结构+数据）？
+15. 如何开启慢日志查询？
+
+     ```sql
+     -- 通过设置全局变量slow_query_log(默认为OFF) 
+     -- 注意: 该设置只对当前数据库有效,且mysql重启,则会失效
+     set global slow_query_log=1;
+     
+     -- 永久设置满日志查询,需要修改mysql配置文件
+     -- 需要添加或者修改一下配置
+     slow_query_log =1  -- 开启慢日志查询
+     slow_query_log_file=/tmp/mysql_slow.log  -- 日志存放路径
+     ```
+
+     
+
+     
+
+16. 数据库导入导出命令（结构+数据）？
 
     
 
-16. 数据库优化方案？
+17. 数据库优化方案？
 
     
 
-17. char和varchar的区别？
+18. char和varchar的区别？
 
     
 
-18. 简述MySQL的执行计划？
+19. 简述MySQL的执行计划？
 
     
 
-38.  	在对name做了唯一索引前提下，简述以下区别：  
-       	      select * from tb where name = ‘Oldboy-Wupeiqi’ 	  
-       	  	  	  	select * from tb where name = ‘Oldboy-Wupeiqi’ 	limit 1
-
-       
-       
-20. 1000w条数据，使用limit 	offset 分页时，为什么越往后翻越慢？如何解决？
+20. 在对name做了唯一索引前提下，简述以下区别：  
+    	      select * from tb where name = ‘Oldboy-Wupeiqi’ 	  
+    	  	  	  	select * from tb where name = ‘Oldboy-Wupeiqi’ 	limit 1
 
     
 
-21. 什么是索引合并？
+21. 1000w条数据，使用limit 	offset 分页时，为什么越往后翻越慢？如何解决？
 
     
 
-22. 什么是覆盖索引？
+22. 什么是索引合并？
 
     
 
-23. 简述数据库读写分离？
+23. 什么是覆盖索引？
 
     
 
-24. 简述数据库分库分表？（水平、垂直）
+24. 简述数据库读写分离？
 
     
 
-25. redis和memcached比较？
+25. 简述数据库分库分表？（水平、垂直）
 
     
 
-26. redis中数据库默认是多少个db 	及作用？
+26. redis和memcached比较？
 
     
 
-27. python操作redis的模块？
+27. redis中数据库默认是多少个db 	及作用？
 
     
 
-28. 如果redis中的某个列表中的数据量非常大，如果实现循环显示每一个值？
+28. python操作redis的模块？
 
     
 
-29. redis如何实现主从复制？以及数据同步机制？
+29. 如果redis中的某个列表中的数据量非常大，如果实现循环显示每一个值？
 
     
 
-30. redis中的sentinel的作用？
+30. redis如何实现主从复制？以及数据同步机制？
 
     
 
-31. 如何实现redis集群？
+31. redis中的sentinel的作用？
 
     
 
-32. redis中默认有多少个哈希槽？
+32. 如何实现redis集群？
 
     
 
-33. 简述redis的有哪几种持久化策略及比较？
+33. redis中默认有多少个哈希槽？
 
     
 
-34. 列举redis支持的过期策略。
+34. 简述redis的有哪几种持久化策略及比较？
 
     
 
-35. MySQL 	里有 2000w 	数据，redis 	中只存 20w 	的数据，如何保证 	redis 	中都是热点数据？ 
+35. 列举redis支持的过期策略。
 
     
 
-36. 写代码，基于redis的列表实现 	先进先出、后进先出队列、优先级队列。
+36. MySQL 	里有 2000w 	数据，redis 	中只存 20w 	的数据，如何保证 	redis 	中都是热点数据？ 
 
     
 
-37. 如何基于redis实现消息队列？
+37. 写代码，基于redis的列表实现 	先进先出、后进先出队列、优先级队列。
 
     
 
-38. 如何基于redis实现发布和订阅？以及发布订阅和消息队列的区别？
+38. 如何基于redis实现消息队列？
 
     
 
-39. 什么是codis及作用？
+39. 如何基于redis实现发布和订阅？以及发布订阅和消息队列的区别？
 
     
 
-40. 什么是twemproxy及作用？
+40. 什么是codis及作用？
 
     
 
-41. 写代码实现redis事务操作。
+41. 什么是twemproxy及作用？
 
     
 
-42. redis中的watch的命令的作用？
+42. 写代码实现redis事务操作。
 
     
 
-43. 基于redis如何实现商城商品数量计数器？
+43. redis中的watch的命令的作用？
 
     
 
-44. 简述redis分布式锁和redlock的实现机制。
+44. 基于redis如何实现商城商品数量计数器？
 
     
 
-45. 什么是一致性哈希？Python中是否有相应模块？
+45. 简述redis分布式锁和redlock的实现机制。
 
     
 
-92.  	如何高效的找到redis中所有以oldboy开头的key？
+46. 什么是一致性哈希？Python中是否有相应模块？
+
+    
+
+47. 如何高效的找到redis中所有以oldboy开头的key？
 
  **第四部分 前端、框架和其他（****155****题）**
 
