@@ -1016,10 +1016,10 @@
          pass
      # L[A]: 代码A的MRO
      MRO = C + merge(L[A],L[B],AB)
-     	= C + merge(AO, BO, AB)  # O为默认继承的object
-         = C + A + merge(O, BO, B)
-         = C + A + B + merge(O)
-         = C A B O 
+     	  	    = C + merge(AO, BO, AB)  # O为默认继承的object
+                = C + A + merge(O, BO, B)
+                = C + A + B + merge(O)
+                = C A B O 
      
      ```
 
@@ -1669,11 +1669,11 @@
 
    ```markdown
    #  InnoDB
-   特点:  支持事务,  支持外键, 支持 崩溃修复能力 和 并发控制,
+   特点:  支持事务,  支持外键, 支持 崩溃修复能力 和 并发控制
    应用:  对于事务要求较高的如 银行系统, 或者要实现并发控制 如 售票, 选择InnoDB有很大优势.
    
    # MyISAM 
-   特点:  数据的插入快, 空间和 内存使用较低(资源占用少)
+   特点:  数据的插入快,读取速度快, 空间和 内存使用较低(资源占用少)
    应用:  如果表主要是用于数据的插入和读取,选择MyISAM能实现处理高效.如果应用的完整性,并发性要求低也可以使用.
    
    # MEMORY 
@@ -1781,7 +1781,7 @@
 
 9. 简述触发器、函数、视图、存储过程？
 
-    ```sql
+    ```python
     # 触发器   https://www.cnblogs.com/zzwlovegfj/archive/2012/07/04/2576989.html
     触发器: 可理解为当达到某条件时,就会执行操作的一种机制;
     mysql 触发器: 可监控insert, delete, update等sql语句; 通过监控事件, 事件发生就会自触发, 如果满足条件就执行触发器中的sql语句;
@@ -1794,64 +1794,7 @@
         END;
       
     # 函数: mysql中内置了许多的函数
-    数值函数
-    Abs(X) //绝对值abs(-10.9) = 10
-    Format(X，D) //格式化千分位数值format(1234567.456, 2) =1,234,567.46
-    Ceil(X) //向上取整ceil(10.1) = 11
-    Floor(X) //向下取整floor (10.1) = 10
-    Round(X) //四舍五入去整
-    Mod(M,N) M%N M MOD N  //求余 10%3=1
-    Pi() //获得圆周率
-    Pow(M,N) //M^N
-    Sqrt(X) //算术平方根
-    Rand() //随机数
-    TRUNCATE(X,D) //截取D位小数
     
-    时间日期函数
-    Now(),current_timestamp() //当前日期时间
-    Current_date() //当前日期
-    current_time() //当前时间
-    Date(‘yyyy-mm-dd HH:ii:ss’) //获取日期部分
-    Time(‘yyyy-mm-dd HH:ii:ss’) //获取时间部分
-    Date_format("yyyy-mm-dd HH:ii:ss","%D %y %a %d %m %b %j")
-    Unix_timestamp() //获得unix时间戳
-    From_unixtime() //从时间戳获得时间
-    
-    -- 字符串函数
-    ASCII(str) //返回字符串str的最左面字符的ASCII代码值.如果str是空字符串,返回0.如果str是NULL,返回NULL.
-    LENGTH(string ) //string长度，字节
-    CHAR_LENGTH(string) //string的字符个数
-    SUBSTRING(str ,position [,length ]) //从str的position开始,取length个字符
-    REPLACE(str ,search_str ,replace_str) //在str中用replace_str替换search_str
-    INSTR(string ,substring ) //返回substring首次在string中出现的位置
-    CONCAT(string [,... ]) //连接字串
-    CHARSET(str) //返回字串字符集
-    LCASE(string ) //转换成小写
-    LEFT(string ,length) //从string2中的左边起取length个字符
-    LOAD_FILE(file_name) //从文件读取内容
-    LOCATE(substring , string [,start_position ]) //同INSTR,但可指定开始位置
-    LPAD(string ,length ,pad ) //重复用pad加在string开头,直到字串长度为length
-    LTRIM(string ) //去除前端空格
-    REPEAT(string ,count ) //重复count次
-    RPAD(string ,length ,pad) //在str后用pad补充,直到长度为length
-    RTRIM(string ) //去除后端空格
-    STRCMP(string1 ,string2 ) //逐字符比较两字串大小
-    TRIM(string) //去除前后两端的空格
-    
-    -- 流程函数
-    CASE WHEN [condition]THEN result[WHEN [condition]THEN result ...][ELSE result]END 多分支
-    IF(expr1,expr2,expr3) 双分支。
-    
-    -- 聚合函数
-    Count()
-    Sum()
-    Max()
-    Min()
-    Avg()
-    Group_concat()
-    其他常用函数
-    Md5()
-    Default()
                         
     -- 视图
     视图是mysql数据库中为了提高查询效率而创建的虚拟的表,  返回的数据为从基表中查询来的数据, 可理解为视图存储的是sql的查询语句;
@@ -1869,172 +1812,308 @@
     -- 存储过程
     存储过程就是数据库sql语言层面的代码封装与重用; 类似于接口, 可供外部程序调用,外部通过给定参数,来执行存储过程;
     
+    mysql> delimiter //
+    mysql> CREATE PROCEDURE simpleproc (OUT param1 INT)
+               -> BEGIN
+        	   ->   SELECT COUNT(*) INTO param1 FROM t;
+        	   -> END//
+    Query OK, 0 rows affected (0.00 sec)
+    mysql> delimiter ;
+    
+    mysql> CALL simpleproc(@a);
+    Query OK, 0 rows affected (0.00 sec)
+    mysql> SELECT @a;
+    +------+
+    | @a   |
+    +------+
+    | 3    |
+    +------+
+    1 row in set (0.00 sec)
+    
     ```
-
+    
 10. MySQL索引种类
 
+    ```markdown
+    # 普通索引
+    加速查询
+    # 主键索引
+    加速查询+约束(唯一不重复, 不为空)
+    # 唯一索引
+    加速查询+约束(唯一不重复)
+    # 全文索引
+    在比较老的版本中,只有MyISAM支持全文索引. 在 mysql 5.6版本后InnoDB也支持了全文索引,但不支持中文;
+    一般会采用sphinx集合 coreseek 来实现中文的全文索引;
     
+    ```
 
 11. 索引在什么情况下遵循最左前缀的规则？
 
-    
+     ```markdown
+     # 采用联合索引时,数据库会从左至右依次查询,遇到范围查询停止;
+     ```
 
 12. 主键和外键的区别？
 
-    
+      ```markdown
+     # 主键
+     主键是用于数据库表中唯一标识一条数据, 且非空唯一,数据库系统默认会为主键建立索引;  例如学生信息表中: 学生的学号
+     # 外键
+     外键是用于联系其他数据库表, 用于数据库表格之间的关系建立, 可为空; 例如: 学生信息表中: 学生的班级;
+      ```
+
+     
 
 13. MySQL常见的函数？
 
-    
-
-14. 列举 创建索引但是无法命中索引的8种情况。
-
-    
-
-15. 如何开启慢日志查询？
-
-     ```sql
-     -- 通过设置全局变量slow_query_log(默认为OFF) 
-     -- 注意: 该设置只对当前数据库有效,且mysql重启,则会失效
-     set global slow_query_log=1;
+      ```python
+     # 数值函数
+     Abs(X) //绝对值abs(-10.9) = 10
+     Format(X，D) //格式化千分位数值format(1234567.456, 2) =1,234,567.46
+     Ceil(X) //向上取整ceil(10.1) = 11
+     Floor(X) //向下取整floor (10.1) = 10
+     Round(X) //四舍五入去整
+     Mod(M,N) M%N M MOD N  //求余 10%3=1
+     Pi() //获得圆周率
+     Pow(M,N) //M^N
+     Sqrt(X) //算术平方根
+     Rand() //随机数
+     TRUNCATE(X,D) //截取D位小数
      
-     -- 永久设置满日志查询,需要修改mysql配置文件
-     -- 需要添加或者修改一下配置
-     slow_query_log =1  -- 开启慢日志查询
-     slow_query_log_file=/tmp/mysql_slow.log  -- 日志存放路径
+     # 时间日期函数
+     Now(),current_timestamp() //当前日期时间
+     Current_date() //当前日期
+     current_time() //当前时间
+     Date(‘yyyy-mm-dd HH:ii:ss’) //获取日期部分
+     Time(‘yyyy-mm-dd HH:ii:ss’) //获取时间部分
+     Date_format("yyyy-mm-dd HH:ii:ss","%D %y %a %d %m %b %j")
+     Unix_timestamp() //获得unix时间戳
+     From_unixtime() //从时间戳获得时间
+     
+     # 字符串函数
+     ASCII(str) //返回字符串str的最左面字符的ASCII代码值.如果str是空字符串,返回0.如果str是NULL,返回NULL.
+     LENGTH(string ) //string长度，字节
+     CHAR_LENGTH(string) //string的字符个数
+     SUBSTRING(str ,position [,length ]) //从str的position开始,取length个字符
+     REPLACE(str ,search_str ,replace_str) //在str中用replace_str替换search_str
+     INSTR(string ,substring ) //返回substring首次在string中出现的位置
+     CONCAT(string [,... ]) //连接字串
+     CHARSET(str) //返回字串字符集
+     LCASE(string ) //转换成小写
+     LEFT(string ,length) //从string2中的左边起取length个字符
+     LOAD_FILE(file_name) //从文件读取内容
+     LOCATE(substring , string [,start_position ]) //同INSTR,但可指定开始位置
+     LPAD(string ,length ,pad ) //重复用pad加在string开头,直到字串长度为length
+     LTRIM(string ) //去除前端空格
+     REPEAT(string ,count ) //重复count次
+     RPAD(string ,length ,pad) //在str后用pad补充,直到长度为length
+     RTRIM(string ) //去除后端空格
+     STRCMP(string1 ,string2 ) //逐字符比较两字串大小
+     TRIM(string) //去除前后两端的空格
+     
+     # 流程函数
+     CASE WHEN [condition]THEN result[WHEN [condition]THEN result ...][ELSE result]END 多分支
+     IF(expr1,expr2,expr3) 双分支。
+     
+     # 聚合函数
+     Count()
+     Sum()
+     Max()
+     Min()
+     Avg()
+     Group_concat()
+     其他常用函数
+     Md5()
+     Default()
+      ```
+
+14. 列举 创建索引但是无法命中索引的8种情况
+
+     ```markdown
+     # 创建了索引而在查询中未能使用情况
+     1.  查询条件中有  or 存在, 即使有条件是创建了索引也不会使用.(通过对每一个条件添加索引解决)
+     2. 多列索引中, 如果不符合最左前原则, 则不会命中索引, 如直接使用第二索引列等; 或者第二索引列使用了范围查询,则第三索引也不会命中
+     3. 模糊查询使用  %开头
+     4. 小表查询
+     5. 没有使用索引字段查询
+     6. 索引作为表达式的一部分,如select * from person where id+1 =2;
+     7. 无包含索引的查询条件
+     8. 索引列为字符串时, 条件需要加上引号
      ```
 
-     
 
-     
+16. 如何开启慢日志查询？
 
-16. 数据库导入导出命令（结构+数据）？
+       ```sql
+       -- 通过设置全局变量slow_query_log(默认为OFF) 
+       -- 注意: 该设置只对当前数据库有效,且mysql重启,则会失效
+       set global slow_query_log=1;
+       
+       -- 永久设置满日志查询,需要修改mysql配置文件
+       -- 需要添加或者修改一下配置
+       slow_query_log =1  -- 开启慢日志查询
+       slow_query_log_file=/tmp/mysql_slow.log  -- 日志存放路径
+       ```
+
+17. 数据库导入导出命令（结构+数据）？
+
+      ```shell
+    # 数据库导出(数据库名: new_schema  表名: account)
+    1.所有表结构+数据
+    mysqldump -uroot -pgram new_schema > /home/gram/桌面/new_schema.sql
+    2.所有表结构
+    mysqldump -uroot -pgram -d new_schema > /home/gram/桌面/new_schema.sql
+    3.单个表结构+数据
+    mysqldump -uroot -pgram new_schema account > /home/gram/桌面/new_schema.sql
+    4.单个表结构
+    mysqldump -uroot -pgram -d new_schema account > /home/gram/桌面/new_schema.sql
+    
+    # 数据库导入(sql文件导入数据库)
+    1.导入sql文件
+    mysql -uroot -pgram < 数据库数据文件路径.sql
+    2.进入mysql客户端,通过Source导入
+    mysql> create database abc;      # 创建数据库
+    mysql> use abc;                  # 使用已创建的数据库 
+    mysql> set names utf8;           # 设置编码
+    mysql> source /home/abc/abc.sql  # 导入备份数据库
+    3. 使用LOAD DATA 导入数据到表
+    mysql> LOAD DATA LOCAL INFILE 'dump.txt' INTO TABLE mytbl;
+      ```
+
+18. 数据库优化方案？
+
+      
+
+19. char和varchar的区别？
+
+      ```markdown
+    # char
+    长度不可变, 长度固定, 读写速度快; 一般用于固定长度数据,如 手机号码, 身份证等;
+    # varchar
+    长度可变,相对较慢; 一般用于其他商品名,地址等
+      ```
+
+20. 简述MySQL的执行计划？
+
+      ```markdown
+    # mysql的执行计划:  获取SQL语句的执行信息, 通过获取这些信息来帮助开发人员进行SQL语句的优化;
+    
+    # 通过在SQL语句前加上explain关键字, 来获取语句执行信息.包括了语句id, 查询类型, 表名, 索引, 等信息;
+      ```
 
     
 
-17. 数据库优化方案？
+21. 在对name做了唯一索引前提下，简述以下区别：
+      	      select * from tb where name = ‘Oldboy-Wupeiqi’ 	 
+      	  	select * from tb where name = ‘Oldboy-Wupeiqi’ 	limit 1
 
-    
+      
 
-18. char和varchar的区别？
+22. 1000w条数据，使用limit 	offset 分页时，为什么越往后翻越慢？如何解决？
 
-    
+      
 
-19. 简述MySQL的执行计划？
+23. 什么是索引合并？
 
-    
+      
 
-20. 在对name做了唯一索引前提下，简述以下区别：  
-    	      select * from tb where name = ‘Oldboy-Wupeiqi’ 	  
-    	  	  	  	select * from tb where name = ‘Oldboy-Wupeiqi’ 	limit 1
+24. 什么是覆盖索引？
 
-    
+      
 
-21. 1000w条数据，使用limit 	offset 分页时，为什么越往后翻越慢？如何解决？
+25. 简述数据库读写分离？
 
-    
+      
 
-22. 什么是索引合并？
+26. 简述数据库分库分表？（水平、垂直）
 
-    
+      
 
-23. 什么是覆盖索引？
+27. redis和memcached比较？
 
-    
+      
 
-24. 简述数据库读写分离？
+28. redis中数据库默认是多少个db 	及作用？
 
-    
+      
 
-25. 简述数据库分库分表？（水平、垂直）
+29. python操作redis的模块？
 
-    
+      
 
-26. redis和memcached比较？
+30. 如果redis中的某个列表中的数据量非常大，如果实现循环显示每一个值？
 
-    
+      
 
-27. redis中数据库默认是多少个db 	及作用？
+31. redis如何实现主从复制？以及数据同步机制？
 
-    
+      
 
-28. python操作redis的模块？
+32. redis中的sentinel的作用？
 
-    
+      
 
-29. 如果redis中的某个列表中的数据量非常大，如果实现循环显示每一个值？
+33. 如何实现redis集群？
 
-    
+      
 
-30. redis如何实现主从复制？以及数据同步机制？
+34. redis中默认有多少个哈希槽？
 
-    
+      
 
-31. redis中的sentinel的作用？
+35. 简述redis的有哪几种持久化策略及比较？
 
-    
+      
 
-32. 如何实现redis集群？
+36. 列举redis支持的过期策略。
 
-    
+      
 
-33. redis中默认有多少个哈希槽？
+37. MySQL 	里有 2000w 	数据，redis 	中只存 20w 	的数据，如何保证 	redis 	中都是热点数据？ 
 
-    
+      
 
-34. 简述redis的有哪几种持久化策略及比较？
+38. 写代码，基于redis的列表实现 	先进先出、后进先出队列、优先级队列。
 
-    
+      
 
-35. 列举redis支持的过期策略。
+39. 如何基于redis实现消息队列？
 
-    
+      
 
-36. MySQL 	里有 2000w 	数据，redis 	中只存 20w 	的数据，如何保证 	redis 	中都是热点数据？ 
+40. 如何基于redis实现发布和订阅？以及发布订阅和消息队列的区别？
 
-    
+      
 
-37. 写代码，基于redis的列表实现 	先进先出、后进先出队列、优先级队列。
+41. 什么是codis及作用？
 
-    
+      
 
-38. 如何基于redis实现消息队列？
+42. 什么是twemproxy及作用？
 
-    
+      
 
-39. 如何基于redis实现发布和订阅？以及发布订阅和消息队列的区别？
+43. 写代码实现redis事务操作。
 
-    
+      
 
-40. 什么是codis及作用？
+44. redis中的watch的命令的作用？
 
-    
+      
 
-41. 什么是twemproxy及作用？
+45. 基于redis如何实现商城商品数量计数器？
 
-    
+      
 
-42. 写代码实现redis事务操作。
+46. 简述redis分布式锁和redlock的实现机制。
 
-    
+      
 
-43. redis中的watch的命令的作用？
+47. 什么是一致性哈希？Python中是否有相应模块？
 
-    
+      
 
-44. 基于redis如何实现商城商品数量计数器？
-
-    
-
-45. 简述redis分布式锁和redlock的实现机制。
-
-    
-
-46. 什么是一致性哈希？Python中是否有相应模块？
-
-    
-
-47. 如何高效的找到redis中所有以oldboy开头的key？
+48. 如何高效的找到redis中所有以oldboy开头的key？
 
  **第四部分 前端、框架和其他（****155****题）**
 
