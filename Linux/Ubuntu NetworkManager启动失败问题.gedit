@@ -1,0 +1,104 @@
+
+Jul 26 19:20:40 gram systemd[1]: Starting Network Manager...
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.5726] NetworkManager (version 1.10.6) is starting... (after a restart)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.5727] Read config: /etc/NetworkManager/NetworkManager.conf (lib: 10-dns-resolved.conf, 20-connectivity-ubuntu.conf, no-mac-addr-change.conf) (etc: 10-globally-managed-devices.conf, default-wifi-powersave-on.conf)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.5772] manager[0x564bc9f67060]: monitoring kernel firmware directory '/lib/firmware'.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.5772] monitoring ifupdown state file '/run/network/ifstate'.
+Jul 26 19:20:40 gram dbus-daemon[857]: [system] Activating via systemd: service name='org.freedesktop.hostname1' unit='dbus-org.freedesktop.hostname1.service' requested by ':1.187' (uid=0 pid=2676 comm="/usr/sbin/NetworkManager --no-daemon " label="unconfined")
+Jul 26 19:20:40 gram systemd[1]: Starting Hostname Service...
+Jul 26 19:20:40 gram dbus-daemon[857]: [system] Successfully activated service 'org.freedesktop.hostname1'
+Jul 26 19:20:40 gram systemd[1]: Started Hostname Service.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8562] hostname: hostname: using hostnamed
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8563] hostname: hostname changed from (none) to "gram"
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8566] dns-mgr[0x564bc9f82940]: init: dns=systemd-resolved, rc-manager=symlink, plugin=systemd-resolved
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8576] rfkill1: found WiFi radio killswitch (at /sys/devices/pci0000:00/0000:00:1d.3/0000:03:00.0/ieee80211/phy0/rfkill1) (driver iwlwifi)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8577] manager[0x564bc9f67060]: rfkill: WiFi hardware radio set enabled
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8578] manager[0x564bc9f67060]: rfkill: WWAN hardware radio set enabled
+Jul 26 19:20:40 gram systemd[1]: Started Network Manager.
+Jul 26 19:20:40 gram dbus-daemon[857]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service' requested by ':1.187' (uid=0 pid=2676 comm="/usr/sbin/NetworkManager --no-daemon " label="unconfined")
+Jul 26 19:20:40 gram systemd[1]: Starting Network Manager Script Dispatcher Service...
+Jul 26 19:20:40 gram dbus-daemon[857]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Jul 26 19:20:40 gram systemd[1]: Started Network Manager Script Dispatcher Service.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8682] init!
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8685]       interface-parser: parsing file /etc/network/interfaces
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8685]       interface-parser: finished parsing file /etc/network/interfaces
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8686] management mode: managed
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8690] devices added (path: /sys/devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.0/net/enx00e04ca2250c, iface: enx00e04ca2250c)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8690] device added (path: /sys/devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.0/net/enx00e04ca2250c, iface: enx00e04ca2250c): no ifupdown configuration found.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8691] devices added (path: /sys/devices/pci0000:00/0000:00:1d.3/0000:03:00.0/net/wlp3s0, iface: wlp3s0)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8691] device added (path: /sys/devices/pci0000:00/0000:00:1d.3/0000:03:00.0/net/wlp3s0, iface: wlp3s0): no ifupdown configuration found.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8691] devices added (path: /sys/devices/virtual/net/lo, iface: lo)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8691] device added (path: /sys/devices/virtual/net/lo, iface: lo): no ifupdown configuration found.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8691] end _init.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8691] settings: loaded plugin ifupdown: (C) 2008 Canonical Ltd.  To report bugs please use the NetworkManager mailing list. (/usr/lib/x86_64-linux-gnu/NetworkManager/libnm-settings-plugin-ifupdown.so)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8691] settings: loaded plugin keyfile: (c) 2007 - 2016 Red Hat, Inc.  To report bugs please use the NetworkManager mailing list.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8692] (-906364608) ... get_connections.
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8692] (-906364608) connections count: 0
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8840] keyfile: new connection /etc/NetworkManager/system-connections/DSL 连接 1 (3c57206a-153b-4b11-8341-4f38bf13e53f,"DSL 连接 1")
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.8964] keyfile: new connection /etc/NetworkManager/system-connections/有线连接 1 (37c9d614-7f48-3ad1-a492-20829998b17c,"有线连接 1")
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9087] keyfile: new connection /etc/NetworkManager/system-connections/Xiaomi_AFA0 (1a60eea8-1d4c-4066-a248-5175d5bfd335,"Xiaomi_AFA0")
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9094] manager: rfkill: WiFi enabled by radio killswitch; enabled by state file
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9094] manager: rfkill: WWAN enabled by radio killswitch; enabled by state file
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9094] manager: Networking is enabled by state file
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9096] dhcp-init: Using DHCP client 'dhclient'
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9096] Loaded device plugin: NMBondDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9097] Loaded device plugin: NMBridgeDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9097] Loaded device plugin: NMDummyDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9097] Loaded device plugin: NMEthernetDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9097] Loaded device plugin: NMInfinibandDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9097] Loaded device plugin: NMIPTunnelDeviceFactory (internal)
+Jul 26 19:20:40 gram nm-dispatcher: req:1 'hostname': new request (1 scripts)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9098] Loaded device plugin: NMMacsecDeviceFactory (internal)
+Jul 26 19:20:40 gram nm-dispatcher: req:1 'hostname': start running ordered scripts...
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9098] Loaded device plugin: NMMacvlanDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9098] Loaded device plugin: NMPppDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9098] Loaded device plugin: NMTunDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9098] Loaded device plugin: NMVethDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9099] Loaded device plugin: NMVlanDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9099] Loaded device plugin: NMVxlanDeviceFactory (internal)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9102] Loaded device plugin: NMWifiFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/libnm-device-plugin-wifi.so)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9105] Loaded device plugin: NMAtmManager (/usr/lib/x86_64-linux-gnu/NetworkManager/libnm-device-plugin-adsl.so)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9112] Loaded device plugin: NMWwanFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/libnm-device-plugin-wwan.so)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9116] Loaded device plugin: NMBluezManager (/usr/lib/x86_64-linux-gnu/NetworkManager/libnm-device-plugin-bluetooth.so)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9121] Loaded device plugin: NMTeamFactory (/usr/lib/x86_64-linux-gnu/NetworkManager/libnm-device-plugin-team.so)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9128] device (lo): carrier: link connected
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9133] manager: (lo): new Generic device (/org/freedesktop/NetworkManager/Devices/1)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9144] manager: (enx00e04ca2250c): new Ethernet device (/org/freedesktop/NetworkManager/Devices/2)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9155] device (enx00e04ca2250c): state change: unmanaged -> unavailable (reason 'managed', sys-iface-state: 'external')
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9164] wifi-nl80211: (wlp3s0): using nl80211 for WiFi device control
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9166] device (wlp3s0): driver supports Access Point (AP) mode
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9173] manager: (wlp3s0): new 802.11 WiFi device (/org/freedesktop/NetworkManager/Devices/3)
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9182] device (wlp3s0): state change: unmanaged -> unavailable (reason 'managed', sys-iface-state: 'external')
+Jul 26 19:20:40 gram kernel: [  593.288646] IPv6: ADDRCONF(NETDEV_UP): enx00e04ca2250c: link is not ready
+
+
+
+# 记一次Ubuntu 18.04.2 LTS桌面版  关于无网络界面的错误, 在设置中的WIFI  和  网络 均出现  "出现错误,请联系软件提供商, 需要运行NetworkManager"
+
+# 通过百度/google无结果, 然后回想自己的操作, 是在使用 网络拨号连接电信网络时, 在设置名时,界面奔溃, 导致上述 WIFI 和 网络 的错误情况;
+
+# 尝试: 由于提示需要运行NetworkManager, 那么直接运行, 并查看系统日志, 发现导致主进程退出
+
+# 在new Ppp device (/org/freedesktop/NetworkManager/Devices/4)
+
+# 通过删除Ppp拨号配置文件
+
+# 重启NetworkManager, 解决故障
+Jul 26 19:20:40 gram kernel: [  593.291426] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+Jul 26 19:20:40 gram NetworkManager[2676]: <info>  [1564140040.9198] manager: (ppp0): new Ppp device (/org/freedesktop/NetworkManager/Devices/4)
+Jul 26 19:20:41 gram kernel: [  594.183481] NetworkManager[2676]: segfault at 7ffdeebaeff8 ip 00007fbca09cfef1 sp 00007ffdeebaf000 error 6 in libglib-2.0.so.0.5600.4[7fbca09af000+114000]
+Jul 26 19:20:41 gram systemd[1]: NetworkManager.service: Main process exited, code=dumped, status=11/SEGV
+Jul 26 19:20:41 gram systemd[1]: NetworkManager.service: Failed with result 'core-dump'.
+
+Jul 26 19:20:42 gram NetworkManager[2690]: <info>  [1564140042.3779] device (wlp3s0): state change: unmanaged -> unavailable (reason 'managed', sys-iface-state: 'external')
+Jul 26 19:20:42 gram kernel: [  594.748363] IPv6: ADDRCONF(NETDEV_UP): enx00e04ca2250c: link is not ready
+Jul 26 19:20:42 gram kernel: [  594.751128] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+Jul 26 19:20:42 gram NetworkManager[2690]: <info>  [1564140042.3796] manager: (ppp0): new Ppp device (/org/freedesktop/NetworkManager/Devices/4)
+Jul 26 19:20:43 gram kernel: [  595.673269] NetworkManager[2690]: segfault at 7ffc0576bff8 ip 000055f8ee5ffdb2 sp 00007ffc0576c000 error 6 in NetworkManager[55f8ee59a000+276000]
+Jul 26 19:20:43 gram systemd[1]: NetworkManager.service: Main process exited, code=dumped, status=11/SEGV
+Jul 26 19:20:43 gram systemd[1]: NetworkManager.service: Failed with result 'core-dump'.
+Jul 26 19:20:43 gram gnome-shell[1723]: Error calling GetManagedObjects() when name owner :1.190 for name org.freedesktop.NetworkManager came back: GDBus.Error:org.freedesktop.DBus.Error.NoReply: Message recipient disconnected from message bus without replying
+Jul 26 19:20:43 gram gsd-sharing[1855]: Error calling GetManagedObjects() when name owner :1.190 for name org.freedesktop.NetworkManager came back: GDBus.Error:org.freedesktop.DBus.Error.NoReply: Message recipient disconnected from message bus without replying
+Jul 26 19:20:43 gram systemd[1]: NetworkManager.service: Service hold-off time over, scheduling restart.
+Jul 26 19:20:43 gram systemd[1]: NetworkManager.service: Scheduled restart job, restart counter is at 2.
+
