@@ -44,7 +44,7 @@
     deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
     ```
 
-    ```
+    ```shell
     # 网易163
     deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
     deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
