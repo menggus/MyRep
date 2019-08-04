@@ -1,0 +1,15 @@
+
+
+{% for item in menu_list %}
+
+    <a href="{{ item.url }}" class="{{ item.class }}">
+
+    <span class="icon-wrap"><i class="fa {{ item.icon }}"></i></span> {{ item.title }} </a>
+
+{% endfor %}
+
+
+
+
+{# 注意: menu.html外层包裹了一层文件夹, 是为了防止模板文件在搜索过程中的冲突 #}
+{# 如果其他app中也存在该menu.html, 搜索顺序会根据app的注册顺序来进行搜索    #}
