@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% load rbac %}
+{% block content %}
+
+    <div class="luffy-container">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">菜单管理
+                    <a href="{% url "menu_add" %}" class="right btn btn-success btn-xs" style="padding: 2px 8px;margin: -3px;">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        新建
+                    </a>
+                </div>
+
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>图标</th>
+                        <th>选项</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for row in data_list %}
+                        <tr>
+                            <td><a href="#">{{ row.title }}</a></td>
+                            <td>
+
+                                <i class="fa {{ row.icon }}" aria-hidden="true"></i>
+
+                            <td>
+                                <a style="color: #333333;" href="{% url 'menu_edit' mid=row.id %}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </a>
+                                &nbsp;&nbsp;
+                                <a style="color: #d9534f;" href="{% url 'menu_delete' mid=row.id %}">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">权限管理</div>
+
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>URL</th>
+                        <th>别名</th>
+                        <th>菜单</th>
+                        <th>所属菜单</th>
+                        <th>选项</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}
