@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% load rbac %}
+{% block content %}
+
+    <div class="luffy-container">
+        <div style="margin: 5px 0;">
+            {% if request|has_permission:'roles_add' %}
+                <a class="btn btn-success" href="{% url 'roles_add' %}">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> 添加
+                </a>
+            {% endif %}
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+
+                <th>ID</th>
+                <th>角色名称</th>
+                <th>权限数量</th>
+                <th>选项</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in data_list %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.permissions.count }}</td>
+
+
+                    {% if request|has_permission:'roles_edit' or request|has_permission:'roles_del' %}
+                        <td>
+                            {% if request|has_permission:'roles_edit' %}
+                                <a style="color: #333333;" href="{% url 'roles_edit' uid=row.id %}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </a>
+                            {% endif %}
+                            <span style="padding: 0 10px;">|</span>
+                            {% if request|has_permission:'roles_delete' %}
+                                <a style="color: #d9534f;" href="{% url 'roles_delete' uid=row.id %}">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            {% endif %}
+
+                        </td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
