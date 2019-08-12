@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div>
+        {# 表格 #}
+        <h2>列表页面</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    {% for title in title_list %}
+                        <td>{{ title }}</td>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in data_list%}
+                    <tr>
+                        {% for item in row %}
+                            <td>{{ item }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+
+    </div>
+{% endblock %}
