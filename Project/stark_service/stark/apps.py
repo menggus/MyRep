@@ -7,8 +7,8 @@ class StarkConfig(AppConfig):
     def ready(self):
         from django.utils.module_loading import autodiscover_modules
         """二.
-            stark: autodiscover_modules() 方法, 来自于admin源码, 在启动服务器时会发现每个应用中的admin.py并执行,来获取需要来用于admin
-            管理的模型类.
+            stark: autodiscover_modules() 方法, 来自于admin源码, 在启动服务器时会发现每个应用中的admin.py并执行,来获取需要来用于
+            admin管理的模型类.
             
             应用该原理, 我们用来自动发现我们所创建的stark.py文件, 来获取相应的功能
             
