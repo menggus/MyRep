@@ -26,7 +26,7 @@ urlpatterns = [
 
 
 """一.
-    查看admin.site.urls, 返回的是一个元组 self.get_urls(), 'admin', self.name, 同时 self.get_urls() 返回的是一个列表
+    查看admin.site.urls, 返回的是一个元组 (self.get_urls(), 'admin', self.name), 同时 self.get_urls() 返回的是一个列表
     
     而这个列表包含了admin路由地址:  如主页, 登录, 退出, 更改密码等等, 以及在admin.py中注册的models的自动生成的相应的增删改查url地址
     

@@ -1,30 +1,126 @@
 {% extends 'layout.html' %}
+{% block css %}
+    <style>
+        .margin_elem {
+            margin: 10px auto;
+        }
 
+
+    </style>
+
+        <style>
+        .comb-search{
+            padding: 5px 20px;
+        }
+        .comb-search .row .whole {
+            width: 60px;
+            float: left;
+
+        }
+
+        .comb-search .row .others {
+            padding-left: 60px;
+        }
+
+        .comb-search .row a {
+            display: inline-block;
+            padding: 5px 8px;
+            margin: 3px;
+            border: 1px solid #d4d4d4;
+
+        }
+
+        .comb-search .row a {
+            display: inline-block;
+            padding: 5px 8px;
+            margin: 3px;
+            border: 1px solid #d4d4d4;
+        }
+
+        .comb-search a.active {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+    </style>
+
+
+
+{% endblock %}
 {% block content %}
     <div>
-        {# 表格 #}
-        <h2>列表页面</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    {% for title in title_list %}
-                        <td>{{ title }}</td>
-                    {% endfor %}
-                </tr>
-            </thead>
 
-            <tbody>
-                {% for row in data_list%}
-                    <tr>
+        <div style="margin: 10px">  {# style这里样式是临时加上的,后续需要写入css #}
+            {# 组合搜索 #}
+            <div class="comb-search">
+                {% for row in comb_list %}
+                    <div class="row">
                         {% for item in row %}
-                            <td>{{ item }}</td>
+                            {{ item|safe }}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            {# 添加按钮 #}
+            <div class="margin_elem">{{ add_btn }}</div>
+            {# 搜索框 #}
+            {% if search_list %}
+                <div style="float: right;">
+                    <form method="GET" class="form-inline">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="q" value="{{ q }}" placeholder="关键字搜索">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+
+            {# 表单 #}
+            <form class="form-inline" method="post">
+                {% csrf_token %}
+
+                {# 批量操作 #}
+                <select name="action" class="form-control margin_elem">
+                    <option>-- 选择操作 --</option>
+                    {% for item in multi_act %}
+                        <option name="{{ item.name }}" value="{{ item.name }}">{{ item.text }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-default">执行</button>
+
+
+                {# 内容 展示 list #}
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        {% for title in title_list %}
+                            <th>{{ title }}</th>
                         {% endfor %}
                     </tr>
-                {% endfor %}
-            </tbody>
+                    </thead>
 
-        </table>
+                    <tbody>
+                    {% for row in data_list %}
+                        <tr>
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </form>
 
-
+            {# 分页 #}
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {# 这里是过滤器, 使得传过来的数据以标签显示而不是字符串 #}
+                    {{ page.page_html|safe }}
+                </ul>
+            </nav>
+        </div>
     </div>
 {% endblock %}
