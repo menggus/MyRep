@@ -4,6 +4,7 @@ from types import FunctionType
 
 register = Library()
 
+
 def header_list(cl):
     """
     表头
@@ -19,6 +20,7 @@ def header_list(cl):
             yield verbose_name
     else:
         yield cl.config.model_class._meta.model_name
+
 
 def body_list(cl):
     """
@@ -40,7 +42,8 @@ def body_list(cl):
             row_list.append(val)
         yield row_list
 
+
 @register.inclusion_tag('stark/table.html')
 def table(cl):
 
-    return {'header_list':header_list(cl),'body_list':body_list(cl)}
+    return {'header_list': header_list(cl), 'body_list': body_list(cl)}

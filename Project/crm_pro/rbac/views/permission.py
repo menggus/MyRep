@@ -240,9 +240,14 @@ def distribute_permissions(request):
     uid = request.GET.get('uid')
     rid = request.GET.get('rid')
 
+    from django.utils.module_loading import import_string
+    from django.conf import settings
+    # 通过配置来获取user表
+    user_model = import_string(settings.USER_MODEL_PATH)
+
     if request.method == 'POST' and request.POST.get('postType') == 'role':
         # 更新选择用户所拥有的角色
-        user = models.UserInfo.objects.filter(id=uid).first()
+        user = user_model.objects.filter(id=uid).first()
         if not user:
             return HttpResponse('用户不存在')
         user.roles.set(request.POST.getlist('roles'))
@@ -253,10 +258,10 @@ def distribute_permissions(request):
             return HttpResponse('角色不存在')
         role.permissions.set(request.POST.getlist('permissions'))
 
-    user_list = models.UserInfo.objects.all()
+    user_list = user_model.objects.all()
     # ############################## 角色信息 ##########################
     # 当前用户拥有的角色
-    user_has_roles = models.UserInfo.objects.filter(id=uid).values('id', 'roles')
+    user_has_roles = user_model.objects.filter(id=uid).values('id', 'roles')
     user_has_roles_dict = {item['roles']: None for item in user_has_roles}
 
     # 所有的角色
@@ -269,7 +274,7 @@ def distribute_permissions(request):
         role_has_permissions = models.Role.objects.filter(id=rid, permissions__id__isnull=False).values('id',
                                                                                                         'permissions')
     elif uid and not rid:
-        user = models.UserInfo.objects.filter(id=uid).first()
+        user = user_model.objects.filter(id=uid).first()
         if not user:
             return HttpResponse('用户不存在')
         role_has_permissions = user.roles.filter(permissions__id__isnull=False).values('id', 'permissions')
