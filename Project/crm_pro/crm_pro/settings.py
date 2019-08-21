@@ -122,3 +122,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# rbac相关 , 关于  user 表的使用.
+# 由于使用rbac组件时, 其中需要使用user表, 而不同的系统可能user表不一样, 所以通过杂setting中配置user表的路径, 然后通过路径在需要使用
+# 的地方导入即可.
+USER_MODEL_PATH = "crm.models.UserInfo"

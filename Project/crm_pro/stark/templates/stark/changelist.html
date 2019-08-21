@@ -1,11 +1,12 @@
-{% extends 'stark/layout.html' %}
+{% extends 'layout.html' %}
 {% load stark %}
 
 {% block css %}
     <style>
-        .comb-search{
+        .comb-search {
             padding: 5px 20px;
         }
+
         .comb-search .row .whole {
             width: 60px;
             float: left;
@@ -42,31 +43,35 @@
     <div>
         <div class="comb-search">
             {% for row in cl.gen_list_filter_rows %}
-            <div class="row">
-                {% for obj in row %}
-                    {{ obj|safe }}
-                {% endfor %}
-            </div>
+                <div class="row">
+                    {% for obj in row %}
+                        {{ obj|safe }}
+                    {% endfor %}
+                </div>
             {% endfor %}
 
         </div>
         {% if cl.add_btn %}
             <div style="margin: 5px 0;">
                 {{ cl.add_btn }}
-            </div>
-        {% endif %}
-        {% if cl.search_list %}
-            <div style="float: right;">
-                <form method="GET" class="form-inline">
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="q" value="{{ cl.q }}" placeholder="关键字搜索">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
+
+                {% if cl.search_list %}
+                    <div style="float: right; margin-bottom: 10px;">
+                        <form method="GET" class="form-inline">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="q" value="{{ cl.q }}" placeholder="关键字搜索">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                {% endif %}
+
             </div>
         {% endif %}
+
+
         <form class="form-inline" method="post">
             {% csrf_token %}
             {% if cl.action_list %}
