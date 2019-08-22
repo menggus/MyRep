@@ -28,58 +28,30 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/stark/service/stark.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="832">
-              <caret line="364" column="22" selection-start-line="364" selection-start-column="22" selection-end-line="364" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#16#0" expanded="true" />
-                <element signature="e#5115#5233#0" />
-                <element signature="e#5295#5467#0" />
-                <element signature="e#5528#5698#0" />
-                <element signature="e#5764#6059#0" />
-                <element signature="e#6106#6330#0" />
-                <element signature="e#6547#6675#0" />
-                <element signature="e#6713#6733#0" />
-                <element signature="e#6775#6799#0" />
-                <element signature="e#6836#6924#0" />
-                <element signature="e#7314#7378#0" />
-                <element signature="e#7419#7522#0" />
-                <element signature="e#7563#7627#0" />
-                <element signature="e#7682#7980#0" />
-                <element signature="e#8021#8085#0" />
-                <element signature="e#8136#8383#0" />
-                <element signature="e#8434#8465#0" />
-                <element signature="e#8433#9772#0" />
-                <element signature="e#11083#11412#0" />
-                <element signature="e#11451#11625#0" />
-                <element signature="e#11735#11764#0" />
-                <element signature="e#13064#13351#0" />
-                <element signature="e#11659#12263#0" />
-                <element signature="e#12419#12441#0" />
-                <element signature="e#12298#12302#0" />
-                <element signature="e#12344#12809#0" />
-                <element signature="e#12850#13413#0" />
-                <element signature="e#13460#14054#0" />
-                <element signature="e#14100#14686#0" />
-                <element signature="e#14784#15944#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/crm/stark.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="217" column="42" selection-start-line="217" selection-start-column="42" selection-end-line="217" selection-end-column="42" />
+            <state relative-caret-position="377">
+              <caret line="348" lean-forward="true" selection-start-line="348" selection-end-line="348" />
               <folding>
                 <element signature="e#0#74#0" expanded="true" />
-                <element signature="e#3030#3223#0" />
-                <element signature="e#3752#3840#0" />
-                <element signature="e#4008#4290#0" />
+                <element signature="e#458#539#0" />
+                <element signature="e#631#1792#0" />
+                <element signature="e#1881#1961#0" />
+                <element signature="e#2046#2127#0" />
+                <element signature="e#2216#3034#0" />
+                <element signature="e#2305#2402#0" />
+                <element signature="e#2483#2571#0" />
+                <element signature="e#3127#4058#0" />
+                <element signature="e#4117#4205#0" />
+                <element signature="e#4250#6187#0" />
+                <element signature="e#6247#6317#0" />
+                <element signature="e#6362#8248#0" />
+                <element signature="e#8448#8816#0" />
+                <element signature="e#8878#9376#0" />
+                <element signature="e#9435#9521#0" />
+                <element signature="e#9571#10820#0" />
               </folding>
             </state>
           </provider>
@@ -98,6 +70,7 @@
     <findStrings>
       <find>models.Userinfo</find>
       <find>on_delete=models</find>
+      <find>非法</find>
     </findStrings>
     <replaceStrings>
       <replace>user_model</replace>
@@ -110,7 +83,6 @@
         <option value="$PROJECT_DIR$/rbac/admin.py" />
         <option value="$PROJECT_DIR$/rbac/service/routes.py" />
         <option value="$PROJECT_DIR$/rbac/models.py" />
-        <option value="$PROJECT_DIR$/crm_pro/urls.py" />
         <option value="$PROJECT_DIR$/stark/templates/stark/layout.html" />
         <option value="$PROJECT_DIR$/stark/config/classlist.py" />
         <option value="$PROJECT_DIR$/stark/config/school.py" />
@@ -119,9 +91,7 @@
         <option value="$PROJECT_DIR$/stark/config/course.py" />
         <option value="$PROJECT_DIR$/crm/config/course.py" />
         <option value="$PROJECT_DIR$/crm/config/readme" />
-        <option value="$PROJECT_DIR$/templates/stark/change.html" />
         <option value="$PROJECT_DIR$/stark/templatetags/stark.py" />
-        <option value="$PROJECT_DIR$/crm_pro/settings.py" />
         <option value="$PROJECT_DIR$/rbac/views/permission.py" />
         <option value="$PROJECT_DIR$/templates/layout.html" />
         <option value="$PROJECT_DIR$/rbac/templates/rbac/distribute_permissions.html" />
@@ -133,14 +103,20 @@
         <option value="$PROJECT_DIR$/rbac/templates/rbac/role_list.html" />
         <option value="$PROJECT_DIR$/stark/templates/stark/change.html" />
         <option value="$PROJECT_DIR$/stark/templates/stark/delete.html" />
-        <option value="$PROJECT_DIR$/crm/models.py" />
+        <option value="$PROJECT_DIR$/crm_pro/urls.py" />
         <option value="$PROJECT_DIR$/stark/templates/stark/changelist.html" />
-        <option value="$PROJECT_DIR$/stark/service/stark.py" />
+        <option value="$PROJECT_DIR$/templates/stark/change.html" />
         <option value="$PROJECT_DIR$/crm/stark.py" />
+        <option value="$PROJECT_DIR$/stark/service/stark.py" />
+        <option value="$PROJECT_DIR$/crm/models.py" />
+        <option value="$PROJECT_DIR$/crm_pro/settings.py" />
+        <option value="$PROJECT_DIR$/crm_pro/__init__.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="65" />
+    <option name="y" value="27" />
     <option name="width" value="1370" />
     <option name="height" value="768" />
   </component>
@@ -149,6 +125,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -156,47 +133,31 @@
               <item name="crm_pro" type="b2602c69:ProjectViewProjectNode" />
               <item name="crm_pro" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="crm_pro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crm_pro" type="462c0819:PsiDirectoryNode" />
-              <item name="crm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crm_pro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crm_pro" type="462c0819:PsiDirectoryNode" />
-              <item name="stark" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crm_pro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crm_pro" type="462c0819:PsiDirectoryNode" />
-              <item name="stark" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/stark/config" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/rbac" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/rbac" />
+      <recent name="$PROJECT_DIR$/crm" />
+      <recent name="$PROJECT_DIR$/crm/migrations" />
+      <recent name="$PROJECT_DIR$/crm/config" />
+      <recent name="$PROJECT_DIR$/stark/config" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/crm" />
       <recent name="$PROJECT_DIR$/templates/stark" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/stark/config" />
-      <recent name="$PROJECT_DIR$/templates/stark" />
-      <recent name="$PROJECT_DIR$/templates" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -250,23 +211,47 @@
       <workItem from="1566291988996" duration="631000" />
       <workItem from="1566307654341" duration="5279000" />
       <workItem from="1566357096304" duration="19444000" />
-      <workItem from="1566390989178" duration="8240000" />
+      <workItem from="1566390989178" duration="8821000" />
+      <workItem from="1566442857181" duration="14391000" />
+      <workItem from="1566480039470" duration="4755000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33594000" />
+    <option name="totallyTimeSpent" value="53321000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="25" width="1855" height="1175" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22166388" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23283082" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3297244" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.08070866" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3297244" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.2933071" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32998326" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19430485" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.13090551" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20669292" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -282,62 +267,12 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" weight="0.32998326" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/stark/utils/pagination.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stark/readme.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="391">
-            <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crm/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbac/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stark/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbac/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/crmPJ/lib/python3.5/site-packages/django/urls/conf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbac/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
-          <folding>
-            <element signature="e#61#254#0" />
-            <element signature="e#293#1063#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/crmPJ/lib/python3.5/site-packages/django/urls/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
@@ -426,16 +361,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crm_pro/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="94" selection-start-line="24" selection-start-column="94" selection-end-line="24" selection-end-column="94" />
-          <folding>
-            <element signature="e#631#663#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rbac/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -485,13 +410,6 @@
     <entry file="file://$USER_HOME$/anaconda3/envs/crmPJ/lib/python3.5/site-packages/django/utils/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/crm_pro/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="127" column="10" selection-start-line="127" selection-start-column="10" selection-end-line="127" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rbac/views/permission.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
@@ -506,13 +424,6 @@
             <element signature="e#4099#4255#0" />
             <element signature="e#4294#6979#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/stark/change.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -606,17 +517,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stark/templates/stark/changelist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="59" column="63" lean-forward="true" selection-start-line="59" selection-start-column="63" selection-end-line="59" selection-end-column="63" />
-          <folding>
-            <element signature="e#1176#1198#0#HTML" expanded="true" />
-            <element signature="e#1303#1345#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stark/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -636,20 +536,6 @@
         <state relative-caret-position="-1479" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crm/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="136" column="14" selection-start-line="136" selection-start-column="4" selection-end-line="136" selection-end-column="14" />
-          <folding>
-            <element signature="e#143#277#0" />
-            <element signature="e#314#795#0" />
-            <element signature="e#830#1037#0" />
-            <element signature="e#1072#1258#0" />
-            <element signature="e#1296#2430#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/crmPJ/lib/python3.5/site-packages/django/forms/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1249">
@@ -664,54 +550,168 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/crm_pro/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#631#663#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stark/templates/stark/changelist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+          <folding>
+            <element signature="e#46#61#0#DjangoTemplate" />
+            <element signature="e#1411#1453#0#HTML" expanded="true" />
+            <element signature="e#2291#2313#0#HTML" expanded="true" />
+            <element signature="e#2569#2594#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/stark/change.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/config/0003_auto_20190821_0507.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/migrations/0003_auto_20190821_0507.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/migrations/0004_auto_20190821_0819.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+          <folding>
+            <element signature="e#169#11433#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/migrations/0002_auto_20190821_0337.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/stark/service/stark.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="832">
-          <caret line="364" column="22" selection-start-line="364" selection-start-column="22" selection-end-line="364" selection-end-column="22" />
+        <state relative-caret-position="564">
+          <caret line="514" selection-start-line="514" selection-end-line="514" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#452#594#0" />
+            <element signature="e#667#950#0" />
+            <element signature="e#4270#5020#0" />
             <element signature="e#5115#5233#0" />
             <element signature="e#5295#5467#0" />
-            <element signature="e#5528#5698#0" />
             <element signature="e#5764#6059#0" />
             <element signature="e#6106#6330#0" />
-            <element signature="e#6547#6675#0" />
-            <element signature="e#6713#6733#0" />
-            <element signature="e#6775#6799#0" />
-            <element signature="e#6836#6924#0" />
-            <element signature="e#7314#7378#0" />
-            <element signature="e#7419#7522#0" />
-            <element signature="e#7563#7627#0" />
-            <element signature="e#7682#7980#0" />
-            <element signature="e#8021#8085#0" />
-            <element signature="e#8136#8383#0" />
-            <element signature="e#8434#8465#0" />
-            <element signature="e#8433#9772#0" />
-            <element signature="e#11083#11412#0" />
-            <element signature="e#11451#11625#0" />
-            <element signature="e#11735#11764#0" />
-            <element signature="e#13064#13351#0" />
-            <element signature="e#11659#12263#0" />
-            <element signature="e#12419#12441#0" />
-            <element signature="e#12298#12302#0" />
-            <element signature="e#12344#12809#0" />
-            <element signature="e#12850#13413#0" />
-            <element signature="e#13460#14054#0" />
-            <element signature="e#14100#14686#0" />
-            <element signature="e#14784#15944#0" />
+            <element signature="e#6553#6704#0" />
+            <element signature="e#6742#6762#0" />
+            <element signature="e#6804#6828#0" />
+            <element signature="e#6999#7306#0" />
+            <element signature="e#7347#7411#0" />
+            <element signature="e#7596#7660#0" />
+            <element signature="e#7715#8013#0" />
+            <element signature="e#8054#8118#0" />
+            <element signature="e#8169#8416#0" />
+            <element signature="e#8455#8486#0" />
+            <element signature="e#8536#9871#0" />
+            <element signature="e#9926#10165#0" />
+            <element signature="e#10208#10728#0" />
+            <element signature="e#10778#11451#0" />
+            <element signature="e#11869#12043#0" />
+            <element signature="e#12049#12078#0" />
+            <element signature="e#13490#13777#0" />
+            <element signature="e#13812#14382#0" />
+            <element signature="e#14426#14448#0" />
+            <element signature="e#14483#14487#0" />
+            <element signature="e#14530#14885#0" />
+            <element signature="e#14927#15386#0" />
+            <element signature="e#15434#15924#0" />
+            <element signature="e#16485#17650#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="63" column="30" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
+          <folding>
+            <element signature="e#143#277#0" />
+            <element signature="e#314#795#0" />
+            <element signature="e#830#1037#0" />
+            <element signature="e#1072#1258#0" />
+            <element signature="e#1296#2430#0" />
+            <element signature="e#2467#5372#0" />
+            <element signature="e#5414#5793#0" />
+            <element signature="e#5835#6997#0" />
+            <element signature="e#7033#8085#0" />
+            <element signature="e#8125#8591#0" />
+            <element signature="e#8632#9460#0" />
+            <element signature="e#9500#10894#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbac/migrations/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-23" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbac/migrations_副本/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/migrations_副本/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm_pro/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="20" lean-forward="true" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm_pro/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="91" column="28" lean-forward="true" selection-start-line="91" selection-start-column="28" selection-end-line="91" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/crm/stark.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="217" column="42" selection-start-line="217" selection-start-column="42" selection-end-line="217" selection-end-column="42" />
+        <state relative-caret-position="377">
+          <caret line="348" lean-forward="true" selection-start-line="348" selection-end-line="348" />
           <folding>
             <element signature="e#0#74#0" expanded="true" />
-            <element signature="e#3030#3223#0" />
-            <element signature="e#3752#3840#0" />
-            <element signature="e#4008#4290#0" />
+            <element signature="e#458#539#0" />
+            <element signature="e#631#1792#0" />
+            <element signature="e#1881#1961#0" />
+            <element signature="e#2046#2127#0" />
+            <element signature="e#2216#3034#0" />
+            <element signature="e#2305#2402#0" />
+            <element signature="e#2483#2571#0" />
+            <element signature="e#3127#4058#0" />
+            <element signature="e#4117#4205#0" />
+            <element signature="e#4250#6187#0" />
+            <element signature="e#6247#6317#0" />
+            <element signature="e#6362#8248#0" />
+            <element signature="e#8448#8816#0" />
+            <element signature="e#8878#9376#0" />
+            <element signature="e#9435#9521#0" />
+            <element signature="e#9571#10820#0" />
           </folding>
         </state>
       </provider>

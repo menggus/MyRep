@@ -1,9 +1,11 @@
 from stark.service.stark import StarkConfig, site, Option, display_chioces
-from crm.models import Department, UserInfo, Course, School, ClassList, Customer
+from crm.models import Department, UserInfo, Course, School, ClassList, Customer, ConsultRecord
 from django.utils.safestring import mark_safe
 from django.conf.urls import url
 from django.shortcuts import HttpResponse, reverse, redirect, render
 from django import forms
+from django.conf import settings
+from django.db import transaction
 
 
 # 部门管理
@@ -108,6 +110,14 @@ site.register(ClassList, ClassListConfig)
 
 # 客户管理
 class CustomerConfig(StarkConfig):
+    # 跟进记录显示
+    def display_consultrecord(self, row=None, header=False):
+        if header:
+            return "跟进记录"
+        url = reverse("stark:crm_consultrecord_list")
+
+        return mark_safe('<a href="{}?cid={}">跟进记录</a>'.format(url, row.pk))
+
     # 表格显示字段
     list_display = [
         "name",
@@ -115,6 +125,7 @@ class CustomerConfig(StarkConfig):
         "qq",
         display_chioces("status", "状态"),
         display_chioces("source", "来源"),
+        display_consultrecord,
         StarkConfig.display_edit,
         StarkConfig.display_del,
     ]
@@ -142,12 +153,22 @@ class PubModelForm(forms.ModelForm):
 
 
 class PubCustomerConfig(StarkConfig):
+    # 跟进记录显示
+    def display_consultrecord(self, row=None, header=False):
+        if header:
+            return "跟进记录"
+        url = reverse("stark:crm_consultrecord_pub_list")
+
+        return mark_safe('<a href="{}?cid={}">跟进记录</a>'.format(url, row.pk))
+
     # 表格显示字段
     list_display = [
+        StarkConfig.display_checkbox,
         "name",
         display_chioces("gender", "性别"),
         "qq",
         display_chioces("status", "状态"),
+        display_consultrecord,
         display_chioces("source", "来源"),
         StarkConfig.display_edit
     ]
@@ -173,6 +194,31 @@ class PubCustomerConfig(StarkConfig):
 
         return self.model_class.objects.filter(consultant__isnull=True)
 
+    # 批量添加公户到私户
+    def multi_add(self, request):
+        pk_list = request.POST.getlist('pk')
+        current_id = 3
+
+        # 最大私有客户数判断
+        private_customer_count = self.model_class.objects.filter(consultant_id=current_id, status=2).count()
+        if len(pk_list) + private_customer_count > settings.MAX_PRIVATE_CUSTOMER:
+            return HttpResponse("您的私有客户超出最大值, 此次申请失败")
+
+        # 数据库操作-事务
+        flage = False
+        with transaction.atomic():
+            # 没有被分配顾问的客户 和 申请客户数是否一致的判断
+            objs_queryset = self.model_class.objects.filter(pk__in=pk_list, consultant__isnull=True)
+            if len(pk_list) == len(objs_queryset):
+                objs_queryset.update(consultant_id=current_id)
+                flage = True
+        if not flage:
+            return HttpResponse("申请客户中存在已被申请的客户, 请刷新重试....")
+
+    multi_add.text = "批量申请"
+
+    action_list = [multi_add]
+
 
 # 客户管理 - 私有用户管理
 class PriModelForm(forms.ModelForm):
@@ -182,12 +228,22 @@ class PriModelForm(forms.ModelForm):
 
 
 class PriCustomerConfig(StarkConfig):
+    # 跟进记录显示
+    def display_consultrecord(self, row=None, header=False):
+        if header:
+            return "跟进记录"
+        url = reverse("stark:crm_consultrecord_pri_list")
+
+        return mark_safe('<a href="{}?cid={}">跟进记录</a>'.format(url, row.pk))
+
     # 表格显示字段
     list_display = [
+        StarkConfig.display_checkbox,
         "name",
         display_chioces("gender", "性别"),
         "qq",
         display_chioces("status", "状态"),
+        display_consultrecord,
         display_chioces("source", "来源"),
         StarkConfig.display_edit
     ]
@@ -219,10 +275,127 @@ class PriCustomerConfig(StarkConfig):
     def save_form(self, form, modify=False):
         current_id = 3  # 需要从session中获取登录信息
         # form.instance.consultant_id = current_id
-        form.instance.consultant = UserInfo.objects.filter(id=current_id).first()
+        if not modify:
+            form.instance.consultant = UserInfo.objects.filter(id=current_id).first()
         form.save()
+
+    # 批量移除私户到公户, 设置consultant_id=None即可变为公有
+    def multi_remove(self, request):
+        pk_list = request.POST.getlist('pk')
+        current_id = 3
+        queryset = self.model_class.objects.filter(pk__in=pk_list, status=2, consultant_id=current_id)
+        if len(pk_list) == len(queryset):
+            queryset.update(consultant_id=None)
+        else:
+            return HttpResponse("不能移除已报名的客户......")
+
+    multi_remove.text = "批量移除"
+
+    action_list = [multi_remove]
 
 
 site.register(Customer, CustomerConfig)
 site.register(Customer, PubCustomerConfig, "pub")
 site.register(Customer, PriCustomerConfig, "pri")
+
+
+# 客户的跟进记录
+class ConsultRecordConfig(StarkConfig):
+
+    # 显示字段
+    list_display = [
+        'customer',
+        'consultant',
+        'note',
+        'date',
+    ]
+
+    # 跟进记录页面, 带查询条件
+    def get_queryset(self):
+        # 无cid: 所有客户跟进记录列表页; 存在cid, 为当前cid的客户跟进记录
+        cid = self.request.GET.get("cid")
+
+        if cid:
+            return ConsultRecord.objects.filter(customer_id=cid)
+
+        return ConsultRecord.objects
+
+
+# 公有客户跟进记录
+class PubConsultRecordConfig(StarkConfig):
+
+    # 显示字段
+    list_display = [
+        'customer',
+        'consultant',
+        'note',
+        'date',
+    ]
+
+    # 公有客户跟踪记录, 只能查看, 不能添加,修改,删除
+    def get_add_btn(self):
+
+        return None
+
+    # 公共客户跟踪记录 查询集为: 所有公户跟踪记录, 带id的公户跟踪记录, 以及公户的跟踪人为None
+    def get_queryset(self):
+        cid = self.request.GET.get("cid")
+
+        if cid:
+            return ConsultRecord.objects.filter(customer_id=cid, customer__consultant=None)
+
+        return ConsultRecord.objects.filter(customer__consultant=None)
+
+
+# 私有客户跟进记录
+class PriConsultRecord(forms.ModelForm):
+    class Meta:
+        model = ConsultRecord
+        exclude = ["customer", "consultant"]
+
+
+class PriConsultRecordConfig(StarkConfig):
+    # 显示字段
+    list_display = [
+        'customer',
+        'consultant',
+        'note',
+        'date',
+        StarkConfig.display_edit_del,
+    ]
+
+    # 私有客户跟踪记录的 表单模型类
+    model_form_class = PriConsultRecord
+
+    # 跟进记录页面, 带查询条件
+    def get_queryset(self):
+        # 无cid: 所有客户跟进记录列表页; 存在cid, 为当前cid的客户跟进记录
+        cid = self.request.GET.get("cid")
+        current_id = 3  # 当前登录用户的id, 需要从session中获取
+        if cid:
+            # 这里的跟进记录业务逻辑
+            # 1.从私人客户页面跳转的 私人跟进记录页面.
+            # 跟进记录数据为: 当前跟进人的id(注意: 曾经跟踪过的客户是否需要区分, 这里做了区分)
+            return ConsultRecord.objects.filter(customer_id=cid, customer__consultant_id=current_id)
+
+        return ConsultRecord.objects.filter(customer__consultant_id=current_id)
+
+    # 私有客户表单数据保存
+    def save_form(self, form, modify=False):
+        if not modify:
+            # 私有账户添加客户跟踪记录时,由于用户只填写跟踪记录,所以 客户 和 跟踪人 需要默认填写
+            params = self.request.GET.get("_filter")
+            cid, num = params.split("=", maxsplit=1)
+            form.instance.customer = Customer.objects.filter(pk=num).first()
+            current_id = 3  # 需要从session中, 获取登录账户id
+            form.instance.consultant = UserInfo.objects.filter(pk=current_id).first()
+        # 编辑修改, 直接修改跟踪记录即可 客户 和 跟踪人 默认存在值
+        form.save()
+
+
+site.register(ConsultRecord, ConsultRecordConfig)
+site.register(ConsultRecord, PubConsultRecordConfig, "pub")
+site.register(ConsultRecord, PriConsultRecordConfig, "pri")
+
+
+# 教学管理

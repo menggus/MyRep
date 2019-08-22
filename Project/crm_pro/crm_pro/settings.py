@@ -77,10 +77,20 @@ WSGI_APPLICATION = 'crm_pro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "crmpro",
+        'USER': "root",
+        "PASSWORD": "gram",
+        "HOST": "localhost",
+        "PORT":3306
     }
 }
 
@@ -122,6 +132,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# CRM业务相关
+# 1.私有客户最大数
+MAX_PRIVATE_CUSTOMER = 150
+
+
 
 # rbac相关 , 关于  user 表的使用.
 # 由于使用rbac组件时, 其中需要使用user表, 而不同的系统可能user表不一样, 所以通过杂setting中配置user表的路径, 然后通过路径在需要使用
