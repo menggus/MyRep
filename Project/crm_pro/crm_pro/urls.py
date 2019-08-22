@@ -18,7 +18,6 @@ from django.urls import path, include
 from stark.service.stark import site
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stark/', site.urls),

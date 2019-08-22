@@ -323,7 +323,14 @@ class StarkConfig(object):
         return render(request, 'stark/changelist.html', context)
 
     def save_form(self, form, modify=False):
+        """
+            表单提交 数据保存至数据库的钩子函数;
+            通过重写, 可重构 form.instance对象(表单数据对象) 的值
 
+        :param form:
+        :param modify: add & change 增加和修改; 用于添加时 需要给form.instance对象加入数据, 而修改时, 不需要;
+        :return:
+        """
         form.save()
 
     def add_view(self, request):
@@ -362,7 +369,7 @@ class StarkConfig(object):
             return render(request, 'stark/change.html', {'form': form})
         form = ModelFormClass(data=request.POST, instance=obj)
         if form.is_valid():
-            form.save()
+            self.save_form(form, True)
             return redirect(self.reverse_list_url())
         return render(request, 'stark/change.html', {'form': form})
 
@@ -376,7 +383,10 @@ class StarkConfig(object):
         if request.method == "GET":
             return render(request, 'stark/delete.html', {'cancel_url': self.reverse_list_url()})
 
+        print(self.model_class.objects.filter(pk=pk))
+
         self.model_class.objects.filter(pk=pk).delete()
+
         return redirect(self.reverse_list_url())
 
     def wrapper(self, func):
@@ -502,7 +512,8 @@ class StarkConfig(object):
 
         if not self.request.GET:
             return del_url
-        param_str = self.request.GET.urlencode()  # q=嘉瑞&page=2
+
+        param_str = self.request.GET.urlencode()
         new_query_dict = QueryDict(mutable=True)
         new_query_dict[self.back_condition_key] = param_str
         del_url = "%s?%s" % (del_url, new_query_dict.urlencode(),)

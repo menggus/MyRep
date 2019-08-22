@@ -41,6 +41,7 @@
 {% endblock %}
 {% block content %}
     <div>
+        {# 组合搜索 #}
         <div class="comb-search">
             {% for row in cl.gen_list_filter_rows %}
                 <div class="row">
@@ -51,29 +52,34 @@
             {% endfor %}
 
         </div>
-        {% if cl.add_btn %}
-            <div style="margin: 5px 0;">
-                {{ cl.add_btn }}
 
-                {% if cl.search_list %}
-                    <div style="float: right; margin-bottom: 10px;">
-                        <form method="GET" class="form-inline">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="q" value="{{ cl.q }}" placeholder="关键字搜索">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </form>
+        {# 添加按钮 & 模糊搜索 #}
+
+        {% if cl.search_list %}
+            <div style="float: right; margin-bottom: 10px;">
+                <form method="GET" class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="q" value="{{ cl.q }}" placeholder="关键字搜索">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
                     </div>
-                {% endif %}
-
+                </form>
             </div>
         {% endif %}
 
+    </div>
 
-        <form class="form-inline" method="post">
-            {% csrf_token %}
+
+    {# 批量操作 #}
+    <form class="form-inline" method="post">
+        {% csrf_token %}
+        <div style="margin: 5px 0;">
+
+            {% if cl.add_btn %}
+                {{ cl.add_btn }}
+            {% endif %}
+
             {% if cl.action_list %}
                 <div class="form-group">
                     <select name="action" class="form-control" style="min-width: 200px;">
@@ -86,16 +92,18 @@
                 </div>
             {% endif %}
 
-            {% table cl %}
+        </div>
 
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    {{ cl.page.page_html|safe }}
-                </ul>
-            </nav>
-        </form>
+
+        {% table cl %}
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{ cl.page.page_html|safe }}
+            </ul>
+        </nav>
+    </form>
     </div>
-
 
 
 {% endblock %}
