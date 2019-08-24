@@ -1,5 +1,5 @@
 from stark.service.stark import StarkConfig, site, Option, display_chioces
-from crm.models import Department, UserInfo, Course, School, ClassList, Customer, ConsultRecord
+from crm.models import Department, UserInfo, Course, School, ClassList, Customer, ConsultRecord, Student, StudyRecord, CourseRecord
 from django.utils.safestring import mark_safe
 from django.conf.urls import url
 from django.shortcuts import HttpResponse, reverse, redirect, render
@@ -197,7 +197,7 @@ class PubCustomerConfig(StarkConfig):
     # 批量添加公户到私户
     def multi_add(self, request):
         pk_list = request.POST.getlist('pk')
-        current_id = 3
+        current_id = 4
 
         # 最大私有客户数判断
         private_customer_count = self.model_class.objects.filter(consultant_id=current_id, status=2).count()
@@ -267,13 +267,13 @@ class PriCustomerConfig(StarkConfig):
     # 获取查询集, 提前筛选, 私有客户筛选
     def get_queryset(self):
         # 私有客户由 登录账号 来进行筛选
-        current_id = 3
+        current_id = 4
 
         return self.model_class.objects.filter(consultant_id=current_id)
 
     # 添加私有客户, 不需要填写consultant, 默认添加登录账户的id
     def save_form(self, form, modify=False):
-        current_id = 3  # 需要从session中获取登录信息
+        current_id = 4  # 需要从session中获取登录信息
         # form.instance.consultant_id = current_id
         if not modify:
             form.instance.consultant = UserInfo.objects.filter(id=current_id).first()
@@ -282,7 +282,7 @@ class PriCustomerConfig(StarkConfig):
     # 批量移除私户到公户, 设置consultant_id=None即可变为公有
     def multi_remove(self, request):
         pk_list = request.POST.getlist('pk')
-        current_id = 3
+        current_id = 4
         queryset = self.model_class.objects.filter(pk__in=pk_list, status=2, consultant_id=current_id)
         if len(pk_list) == len(queryset):
             queryset.update(consultant_id=None)
@@ -371,7 +371,7 @@ class PriConsultRecordConfig(StarkConfig):
     def get_queryset(self):
         # 无cid: 所有客户跟进记录列表页; 存在cid, 为当前cid的客户跟进记录
         cid = self.request.GET.get("cid")
-        current_id = 3  # 当前登录用户的id, 需要从session中获取
+        current_id = 4  # 当前登录用户的id, 需要从session中获取
         if cid:
             # 这里的跟进记录业务逻辑
             # 1.从私人客户页面跳转的 私人跟进记录页面.
@@ -387,7 +387,7 @@ class PriConsultRecordConfig(StarkConfig):
             params = self.request.GET.get("_filter")
             cid, num = params.split("=", maxsplit=1)
             form.instance.customer = Customer.objects.filter(pk=num).first()
-            current_id = 3  # 需要从session中, 获取登录账户id
+            current_id = 4  # 需要从session中, 获取登录账户id
             form.instance.consultant = UserInfo.objects.filter(pk=current_id).first()
         # 编辑修改, 直接修改跟踪记录即可 客户 和 跟踪人 默认存在值
         form.save()
@@ -399,3 +399,59 @@ site.register(ConsultRecord, PriConsultRecordConfig, "pri")
 
 
 # 教学管理
+
+class StudentConfig(StarkConfig):
+
+    def display_classname(self, row=None, header=False):
+        if header:
+            return "班级"
+
+        classlist = row.class_list.all()
+
+        list_name = ["{}-{}".format(item.course.name, item.semester) for item in classlist]
+        return ",   ".join(list_name)
+
+    list_display = ["username", display_classname, StarkConfig.display_edit_del]
+
+
+site.register(Student, StudentConfig)
+
+
+# 课程记录
+class CourseRecordConfig(StarkConfig):
+
+    def display_courserecord(self, row=None, header=False):
+        if header:
+            return "上课记录"
+
+        return "{} {}".format(row.class_obj, row.day_num)
+
+    list_display = [StarkConfig.display_checkbox, "class_obj", StarkConfig.display_edit_del]
+
+    def multi_init_courserecord(self, request):
+
+        nid_list = request.POST.getlist("pk")
+        # 获取初始化的班级id
+        for nid in nid_list:
+            course_record_obj = self.model_class.objects.filter(id=nid).first()
+            class_id = course_record_obj.class_obj
+            # 根据班级查找班级学生,
+            stu_objs = Student.objects.filter(class_list=class_id)
+
+            exists = StudyRecord.objects.filter(course_record=course_record_obj).exists()
+            if exists:
+                continue
+
+            study_record_list = []
+            # 为每一个学生初始化一个学习记录
+            for stu in stu_objs:
+                study_record_list.append(StudyRecord(course_record=course_record_obj, student=stu))
+
+            StudyRecord.objects.bulk_create(study_record_list)
+
+    multi_init_courserecord.text = "批量初始化"
+
+    action_list = [multi_init_courserecord]
+
+
+site.register(CourseRecord, CourseRecordConfig)

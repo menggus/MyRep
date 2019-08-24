@@ -59,7 +59,6 @@ class Row(object):
         else:
             yield '<a class="active" href="?%s">全部</a>' %(tatal_query_dict.urlencode(),)
 
-
         yield '</div>'
         yield '<div class="others">'
 
@@ -73,7 +72,7 @@ class Row(object):
             if not self.option.is_multi: # 单选
                 if str(val) in origin_value_list:
                     query_dict.pop(self.option.field)
-                    yield '<a class="active" href="?%s">%s</a>' %(query_dict.urlencode(),text)
+                    yield '<a class="active" href="?%s">%s</a>' % (query_dict.urlencode(),text)
                 else:
                     query_dict[self.option.field] = val
                     yield '<a href="?%s">%s</a>' % (query_dict.urlencode(), text)
@@ -82,7 +81,7 @@ class Row(object):
                 if str(val) in origin_value_list:
                     # 已经选，把自己去掉
                     multi_val_list.remove(str(val))
-                    query_dict.setlist(self.option.field,multi_val_list)
+                    query_dict.setlist(self.option.field, multi_val_list)
                     yield '<a class="active" href="?%s">%s</a>' % (query_dict.urlencode(), text)
                 else:
                     multi_val_list.append(val)
