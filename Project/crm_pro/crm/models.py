@@ -83,7 +83,7 @@ class ClassList(models.Model):
     memo = models.CharField(verbose_name='说明', max_length=256, blank=True, null=True)
 
     def __str__(self):
-        return "{0}({1}期)".format(self.course.name, self.semester)
+        return "{0}-{1}期".format(self.course.name, self.semester)
 
 
 class Customer(models.Model):
@@ -173,7 +173,8 @@ class Customer(models.Model):
     last_consult_date = models.DateField(verbose_name="最后跟进日期", auto_now_add=True)
 
     def __str__(self):
-        return "姓名:{0},联系方式:{1}".format(self.name, self.qq, )
+        # return "姓名:{0},联系方式:{1}".format(self.name, self.qq, )
+        return "{}".format(self.name)
 
 
 class ConsultRecord(models.Model):
@@ -219,7 +220,6 @@ class Student(models.Model):
     emergency_contract = models.CharField(max_length=32, blank=True, null=True, verbose_name='紧急联系人')
     class_list = models.ManyToManyField(verbose_name="已报班级", to='ClassList', blank=True)
 
-
     company = models.CharField(verbose_name='公司', max_length=128, blank=True, null=True)
     position = models.CharField(verbose_name='岗位', max_length=64, blank=True, null=True)
     salary = models.IntegerField(verbose_name='薪资', blank=True, null=True)
@@ -247,7 +247,8 @@ class CourseRecord(models.Model):
     """
     class_obj = models.ForeignKey(verbose_name="班级", to="ClassList", blank=True, null=True, on_delete=models.SET_NULL)
     day_num = models.IntegerField(verbose_name="节次")
-    teacher = models.ForeignKey(verbose_name="讲师", to='UserInfo', blank=True, null=True, on_delete=models.SET_NULL)
+    teacher = models.ForeignKey(verbose_name="讲师", to='UserInfo', blank=True, null=True, on_delete=models.SET_NULL,
+                                limit_choices_to={"depart_id__in": [7, 8, 9]})
     date = models.DateField(verbose_name="上课日期", auto_now_add=True)
 
     course_title = models.CharField(verbose_name='本节课程标题', max_length=64, blank=True, null=True)
@@ -255,7 +256,6 @@ class CourseRecord(models.Model):
     homework_title = models.CharField(verbose_name='作业标题', max_length=64)
     homework_memo = models.TextField(verbose_name='作业描述')
     exam = models.TextField(verbose_name='踩分点')
-
 
     def __str__(self):
         return "{0} day{1}".format(self.class_obj, self.day_num)
@@ -290,7 +290,7 @@ class StudyRecord(models.Model):
 
     homework = models.FileField(verbose_name='作业文件', blank=True, null=True)
     stu_memo = models.TextField(verbose_name='学员备注', blank=True, null=True)
-    date = models.DateTimeField(verbose_name='提交作业日期')
+    date = models.DateTimeField(verbose_name='提交作业日期', blank=True, null=True)
 
     def __str__(self):
         return "{0}-{1}".format(self.course_record, self.student)
