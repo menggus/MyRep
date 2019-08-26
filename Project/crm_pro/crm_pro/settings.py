@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rbac.middleware.rbac.RbacMiddleware',
 ]
 
 ROOT_URLCONF = 'crm_pro.urls'
@@ -138,8 +139,15 @@ STATIC_URL = '/static/'
 MAX_PRIVATE_CUSTOMER = 150
 
 
-
 # rbac相关 , 关于  user 表的使用.
 # 由于使用rbac组件时, 其中需要使用user表, 而不同的系统可能user表不一样, 所以通过杂setting中配置user表的路径, 然后通过路径在需要使用
 # 的地方导入即可.
 USER_MODEL_PATH = "crm.models.UserInfo"
+
+MENU_SESSION_KEY = "ghtAW`123asda"
+PERMISSION_SESSION_KEY = "SFSDGKH233YT218"
+
+PERMISSION_VALID_URL = [
+    "/login/",
+    "/admin/.*",
+]

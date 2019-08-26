@@ -16,10 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from stark.service.stark import site
+from django.conf.urls import url
+
+# 问题: 使用path做路由分发时, 所有通过item.pattern.regex.pattern获取的路由分发前缀后面会加上"\/",导致最后生产的url出现"\",
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('stark/', site.urls),
+#     path('rbac/', include(("rbac.urls", 'rbac'), namespace='rbac')),  # django 2.0 需要这么写, 不然会报错
+#     path('', include(("crm.urls", 'crm'), namespace='crm'))
+# ]
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('stark/', site.urls),
-    path('rbac/', include(("rbac.urls", 'rbac'), namespace='rbac'))  # django 2.0 需要这么写, 不然会报错
+    url('admin/', admin.site.urls),
+    url('stark/', site.urls),
+    url('rbac/', include(("rbac.urls", 'rbac'), namespace='rbac')),  # django 2.0 需要这么写, 不然会报错
+    url('', include(("crm.urls", "crm"), namespace='crm')),
 ]

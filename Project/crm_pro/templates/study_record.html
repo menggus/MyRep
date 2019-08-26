@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block css %}
+
+{% endblock %}
+{% block content %}
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">学习记录</h3>
+        </div>
+        <div class="panel-body">
+            <div style="width: 680px;margin: 0 auto;">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>学员</th>
+                            <th>考勤</th>
+                            <th>分数</th>
+                            <th>评语</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for form in formset %}
+                            <tr>
+                                {{ form.id }}
+                                {# 如果使用form.student,默认会显示select标签 #}
+                                <td class="hidden">{{ form.student }}</td>
+                                {# 这里为了只显示学员姓名, 采用instance对象, 即当前行的对象进行显示 #}
+                                {# 但是请注意, 不能丢掉上面隐藏的form的对象标签, 不然提交的数据的student为None #}
+                                <td>{{ form.instance.student }}</td>
+                                <td>{{ form.record }} {{ form.record.errors.0 }}</td>
+                                <td>{{ form.score }} {{ form.score.errors.0 }}</td>
+                                <td>{{ form.homework_note }} {{ form.homework_note.errors.0 }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                    <input type="submit" value="提交">
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
