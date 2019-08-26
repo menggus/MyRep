@@ -197,7 +197,7 @@ class PubCustomerConfig(StarkConfig):
     # 批量添加公户到私户
     def multi_add(self, request):
         pk_list = request.POST.getlist('pk')
-        current_id = 4
+        current_id = request.session.get("userinfo").get("id")  # 从session获取
 
         # 最大私有客户数判断
         private_customer_count = self.model_class.objects.filter(consultant_id=current_id, status=2).count()
@@ -267,13 +267,13 @@ class PriCustomerConfig(StarkConfig):
     # 获取查询集, 提前筛选, 私有客户筛选
     def get_queryset(self):
         # 私有客户由 登录账号 来进行筛选
-        current_id = 4
+        current_id = self.request.session.get("userinfo").get("id")
 
         return self.model_class.objects.filter(consultant_id=current_id)
 
     # 添加私有客户, 不需要填写consultant, 默认添加登录账户的id
     def save_form(self, form, modify=False):
-        current_id = 4  # 需要从session中获取登录信息
+        current_id = self.request.session.get("userinfo").get("id")  # 需要从session中获取登录信息
         # form.instance.consultant_id = current_id
         if not modify:
             form.instance.consultant = UserInfo.objects.filter(id=current_id).first()
@@ -282,7 +282,7 @@ class PriCustomerConfig(StarkConfig):
     # 批量移除私户到公户, 设置consultant_id=None即可变为公有
     def multi_remove(self, request):
         pk_list = request.POST.getlist('pk')
-        current_id = 4
+        current_id = request.session.get("userinfo").get("id")
         queryset = self.model_class.objects.filter(pk__in=pk_list, status=2, consultant_id=current_id)
         if len(pk_list) == len(queryset):
             queryset.update(consultant_id=None)
@@ -371,7 +371,8 @@ class PriConsultRecordConfig(StarkConfig):
     def get_queryset(self):
         # 无cid: 所有客户跟进记录列表页; 存在cid, 为当前cid的客户跟进记录
         cid = self.request.GET.get("cid")
-        current_id = 4  # 当前登录用户的id, 需要从session中获取
+
+        current_id = self.request.session.get("userinfo").get("id")  # 当前登录用户的id, 需要从session中获取
         if cid:
             # 这里的跟进记录业务逻辑
             # 1.从私人客户页面跳转的 私人跟进记录页面.
@@ -387,7 +388,7 @@ class PriConsultRecordConfig(StarkConfig):
             params = self.request.GET.get("_filter")
             cid, num = params.split("=", maxsplit=1)
             form.instance.customer = Customer.objects.filter(pk=num).first()
-            current_id = 4  # 需要从session中, 获取登录账户id
+            current_id = self.request.session.get("userinfo").get("id")  # 需要从session中, 获取登录账户id
             form.instance.consultant = UserInfo.objects.filter(pk=current_id).first()
         # 编辑修改, 直接修改跟踪记录即可 客户 和 跟踪人 默认存在值
         form.save()
@@ -420,15 +421,20 @@ site.register(Student, StudentConfig)
 # 课程记录
 class CourseRecordConfig(StarkConfig):
 
-    def display_courserecord(self, row=None, header=False):
+    # def display_courserecord(self, row=None, header=False):
+    #     if header:
+    #         return "课程记录"
+    #
+    #     return "{}-第{}天".format(row.class_obj, row.day_num)
+    def display_study_record(self, row=None, header=False):
         if header:
-            return "上课记录"
+            return "学习记录"
+        url = reverse("stark:crm_studyrecord_list")
+        return mark_safe("<a href='{}?ccid={}'>学习记录</a>".format(url, row.pk))
 
-        return "{} {}".format(row.class_obj, row.day_num)
+    list_display = [StarkConfig.display_checkbox, "class_obj", display_study_record,StarkConfig.display_edit_del]
 
-    list_display = [StarkConfig.display_checkbox, "class_obj", StarkConfig.display_edit_del]
-
-    def multi_init_courserecord(self, request):
+    def multi_init_studyrecord(self, request):
 
         nid_list = request.POST.getlist("pk")
         # 获取初始化的班级id
@@ -449,9 +455,65 @@ class CourseRecordConfig(StarkConfig):
 
             StudyRecord.objects.bulk_create(study_record_list)
 
-    multi_init_courserecord.text = "批量初始化"
+    multi_init_studyrecord.text = "批量初始化"
 
-    action_list = [multi_init_courserecord]
+    action_list = [multi_init_studyrecord]
 
 
 site.register(CourseRecord, CourseRecordConfig)
+
+
+# 学习记录
+class StudyRecordModel(forms.ModelForm):
+
+    class Meta:
+        model = StudyRecord
+        fields = ["student", "record", "score", "homework_note"]
+
+
+class StudyRecordConfig(StarkConfig):
+    #
+    # list_display = ["student", StarkConfig.display_edit]
+    #
+    # def get_add_btn(self):
+    #     return False
+    #
+    # def get_queryset(self):
+    #     ccid = self.request.GET.get("ccid")
+    #
+    #     if not ccid:
+    #         return self.model_class.objects.none()
+    #
+    #     return self.model_class.objects.filter(course_record_id=ccid)
+    #  以上不能批量修改学员的学习记录, 这里引入modelformset_factory进行批量生产管理
+    def get_urls(self):
+        urlpatterns = [
+            url(r'^list/$', self.wrapper(self.changelist_view), name=self.get_reverse_url_name("list")),
+        ]
+        return urlpatterns
+
+    def changelist_view(self, request):
+
+        ccid = request.GET.get("ccid")
+
+        if not ccid:
+            return HttpResponse("请求参数错误....")
+
+        make_formset_cls = forms.modelformset_factory(model=StudyRecord, form=StudyRecordModel, extra=0)
+
+        queryset = self.model_class.objects.filter(course_record_id=ccid)
+
+        if request.method == "GET":
+            formset = make_formset_cls(queryset=queryset)
+            return render(request, "study_record.html", {"formset": formset})
+        else:
+            formset = make_formset_cls(data=request.POST)
+            if formset.is_valid():
+                instandce = formset.save()
+
+                redirect("/stark/crm/studyrecord/list/?ccid={}".format(ccid))
+        # 显示错误信息
+        return render(request, "study_record.html", {"formset": formset})
+
+
+site.register(StudyRecord, StudyRecordConfig)

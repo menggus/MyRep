@@ -1,15 +1,17 @@
 {% load staticfiles %}
+{% load rbac %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>CRM</title>
-{# 标题小头像 #}
-{#    <link rel="shortcut icon" href="{% static 'stark/imgs/luffy-study-logo.png' %} ">#}
+    {# 标题小头像 #}
+    {#    <link rel="shortcut icon" href="{% static 'stark/imgs/luffy-study-logo.png' %} ">#}
     <link rel="stylesheet" href="{% static 'stark/plugins/bootstrap/css/bootstrap.css' %} "/>
     <link rel="stylesheet" href="{% static 'stark/plugins/font-awesome/css/font-awesome.css' %} "/>
     <link rel="stylesheet" href="{% static 'stark/css/commons.css' %} "/>
     <link rel="stylesheet" href="{% static 'stark/css/nav.css' %} "/>
+    <link rel="stylesheet" href="{% static 'rbac/css/rbac.css' %} "/>
     <style>
         body {
             margin: 0;
@@ -121,12 +123,12 @@
 <div class="pg-body">
     <div class="left-menu">
         <div class="menu-body">
-
+            {% menu request %}
         </div>
     </div>
     <div class="right-body">
         <div>
-
+            {% breadcrumb request %}
         </div>
         <div style="padding: 10px;">
             {% block content %} {% endblock %}
@@ -136,6 +138,7 @@
 
 
 <script src="{% static 'stark/js/jquery-3.3.1.min.js' %} "></script>
+<script src="{% static 'rbac/js/rbac.js' %} "></script>
 <script src="{% static 'stark/plugins/bootstrap/js/bootstrap.js' %} "></script>
 {% block js %} {% endblock %}
 </body>
