@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 from django.conf import settings
 from django.utils.module_loading import import_string
-from django.urls import URLResolver, URLPattern
+from django.urls import URLResolver
 from collections import OrderedDict
 
 
@@ -78,10 +78,7 @@ def get_all_url_dict(ignore_namespace_list=None):
 
     recursion_urls(None, "/", urlpatterns, url_ordered_dict)
 
+    print(url_ordered_dict)
+
     return url_ordered_dict
 
-
-if __name__ == '__main__':
-    result = get_all_url_dict(["admin"])
-
-    print(result)
