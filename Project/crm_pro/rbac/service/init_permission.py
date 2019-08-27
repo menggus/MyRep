@@ -46,6 +46,7 @@ def init_permission(user, request):
             'title': item['permissions__title'],
             'url': item['permissions__url']
         }
+
         if menu_id in menu_dict:
             menu_dict[menu_id]['children'].append(menu_node)
         else:
@@ -60,3 +61,4 @@ def init_permission(user, request):
     # 将权限信息和菜单信息 放入session
     request.session[settings.MENU_SESSION_KEY] = menu_dict
     request.session[settings.PERMISSION_SESSION_KEY] = permission_dict
+

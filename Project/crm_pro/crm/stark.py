@@ -8,6 +8,7 @@ from django.conf import settings
 from django.db import transaction
 
 
+
 # 部门管理
 class DepartConfig(StarkConfig):
 
@@ -160,6 +161,17 @@ class PubCustomerConfig(StarkConfig):
         url = reverse("stark:crm_consultrecord_pub_list")
 
         return mark_safe('<a href="{}?cid={}">跟进记录</a>'.format(url, row.pk))
+
+    # 权限控制到按钮的显示
+    def get_add_btn(self):
+
+        permission_list = self.request.session.get(settings.PERMISSION_SESSION_KEY)
+        print(self.request.session.get(settings.PERMISSION_SESSION_KEY))
+
+        url = self.get_reverse_url_name("add")  # "stark:crm_customer_pub_add"
+
+        if url not in permission_list:
+            return None
 
     # 表格显示字段
     list_display = [

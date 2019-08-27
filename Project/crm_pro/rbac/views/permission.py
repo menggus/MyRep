@@ -17,22 +17,26 @@ def menu_list(request):
     :return:
     """
     menus = models.Menu.objects.all()
-
+    # 页面菜单序号mid, 用于点击样式控制
     mid = request.GET.get('mid')
-    root_permission_list = []
+
     if mid:
-        # 找到可以成为菜单的权限 + 某个菜单下的
+        # 找到可以成为菜单的权限 + 某个菜单下的所有权限
         permissions = models.Permission.objects.filter(menu_id=mid).order_by('-id')
     else:
         # 找到可以成为菜单的权限
         permissions = models.Permission.objects.filter(menu__isnull=False).order_by('-id')
-
+    # 获取根权限查询集
     root_permission_queryset = permissions.values('id', 'title', 'url', 'name', 'menu__title')
+    # 构建页面显示所需数据结构
+    root_permission_list = []
     root_permission_dict = {}
+
     for item in root_permission_queryset:
+
         item['children'] = []
-        root_permission_list.append(item)
-        root_permission_dict[item['id']] = item
+        root_permission_list.append(item)  # [{item1, children:[]}, {item2, children:[]}, .....]
+        root_permission_dict[item['id']] = item  # {1: item1, 2:item2, .......}
 
     # 找到可以成为菜单的权限的所有子权限
     node_permission_list = models.Permission.objects.filter(pid__in=permissions).order_by('-id').values('id',
@@ -41,8 +45,9 @@ def menu_list(request):
                                                                                                         'name',
                                                                                                         'pid')
     for node in node_permission_list:
-        pid = node['pid']
-        root_permission_dict[pid]['children'].append(node)
+        pid = node['pid']  # 获取父权限id
+        root_permission_dict[pid]['children'].append(node)  # 给root_permission_list中元素字典的children:[]添加数据
+
 
     return render(
         request,
@@ -164,7 +169,7 @@ def multi_permissions(request):
     if request.method == 'POST' and post_type == 'generate':
         formset = MultiPermissionFormSet(request.POST)
         if not formset.is_valid():
-            generate_formset = formset
+            generate_formset = formset  # 直接赋值给generate_formset, 不用在后面重新计算待新建权限
         else:
             for row_dict in formset.cleaned_data:
                 row_dict.pop('id')
@@ -177,7 +182,7 @@ def multi_permissions(request):
                 permission_id = row_dict.pop('id')
                 models.Permission.objects.filter(id=permission_id).update(**row_dict)
         else:
-            update_formset = formset
+            update_formset = formset  # update_formset, 不用在后面重新计算待更新权限
 
     # 1.1 去数据库中获取所有权限
     # [{},{}]
@@ -190,16 +195,17 @@ def multi_permissions(request):
     # 1.2 数据库中有的所有权限name的集合
     permission_name_set = set(permisssion_dict.keys())
 
-
     # 2.1 获取路由系统中所有的URL
     # {'rbac:menu_list':{'url':.... },,,}
     router_dict = get_all_url_dict(ignore_namespace_list=['admin'])
 
+    # 把数据库中权限信息 更新到 router_dict中,即 数据库中和从系统url获取的url数据一样.
     for row in permissions:
         name = row['name']
         if name in router_dict:
             router_dict[name].update(row)
 
+    print("---------", router_dict)
     # 2.2 路由系统中的所有权限name的集合
     router_name_set = set(router_dict.keys())
 

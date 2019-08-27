@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-import re
 from django.template import Library
 from django.conf import settings
 from collections import OrderedDict
-from django.urls import reverse
-from urllib.parse import urlencode
 
 register = Library()
 

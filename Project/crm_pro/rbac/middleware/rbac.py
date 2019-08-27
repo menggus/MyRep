@@ -4,6 +4,7 @@ import re
 from django.conf import settings
 from django.shortcuts import HttpResponse
 from django.http import JsonResponse
+from django.utils.safestring import mark_safe
 
 
 class MiddlewareMixin(object):
@@ -42,11 +43,11 @@ class RbacMiddleware(MiddlewareMixin):
 
         flag = False
 
-        # 3. 对用户请求的url进行匹配
+        # 构建的层级菜单数据列表
         request.current_breadcrumb_list = [
             {'title': '首页', 'url': '#'}
         ]
-
+        # 3. 对用户请求的url进行匹配
         for name, item in permission_dict.items():
             url = item['url']
             regex = "^%s$" % (url,)
