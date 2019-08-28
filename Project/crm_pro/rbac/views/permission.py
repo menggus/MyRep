@@ -48,7 +48,6 @@ def menu_list(request):
         pid = node['pid']  # 获取父权限id
         root_permission_dict[pid]['children'].append(node)  # 给root_permission_list中元素字典的children:[]添加数据
 
-
     return render(
         request,
         'rbac/menu_list.html',
@@ -205,7 +204,6 @@ def multi_permissions(request):
         if name in router_dict:
             router_dict[name].update(row)
 
-    print("---------", router_dict)
     # 2.2 路由系统中的所有权限name的集合
     router_name_set = set(router_dict.keys())
 
