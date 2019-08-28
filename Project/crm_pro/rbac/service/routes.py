@@ -78,7 +78,5 @@ def get_all_url_dict(ignore_namespace_list=None):
 
     recursion_urls(None, "/", urlpatterns, url_ordered_dict)
 
-    print(url_ordered_dict)
-
     return url_ordered_dict
 

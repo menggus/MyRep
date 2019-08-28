@@ -37,7 +37,7 @@ def display_chioces(field, head):
 
 
 class Row(object):
-    def __init__(self,data_list,option,query_dict):
+    def __init__(self, data_list, option, query_dict):
         """
         元组
         :param data_list:元组或queryset
