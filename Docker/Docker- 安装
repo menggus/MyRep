@@ -1,0 +1,101 @@
+## Ubuntu 18.04 LTS 安装Docker
+
+### 软件源设置
+- 中国科技大学源
+```shell
+# 复制软件源文件, 备份
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+# sed处理文本文件,  -i 表示插入文件
+sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+sudo apt update
+```
+### 安装需要的包
+```
+sudo apt install apt-transport-https ca-certificates software-properties-common curl
+```
+
+### 添加GPG密钥, 并提那家Docker-ce软件源
+```
+curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \
+$(lsb_release -cs) stable"
+```
+
+### 添加成功,更新软件包
+```
+sudo apt update
+```
+
+### 安装Docker-ce
+```
+sudo apt install docker-ce
+```
+
+### 设置开机自启动Docker-ce(默认已设置并启动)
+```
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+### 测试运行
+```
+sudo docker run hello-world
+
+# 第一次运行一般会报错, 因为还无hello-world镜像
+# 再次运行即可
+
+# 成功提示信息
+"""Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+"""
+```
+### 去掉sudo运行 docker
+- 默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。
+
+```
+# 添加 docker group ：
+sudo groupadd docker
+# 将用户加入该 group 内
+sudo usermod -aG docker $USER
+# 重启服务
+sudo service docker restart
+# 必要一步,因为 groups 命令获取到的是缓存的组信息，刚添加的组信息未能生效, docker命令直接执行同样出错
+newgrp - docker
+```
+
+### 阿里云 - 镜像下载加速配置
+- 获取阿里云镜像加速器 加速器地址
+- 不同的阿里云账号不一样
+```
+# 在/etc/docker/文件夹下创建daemon.json文件,并输入配置, "****"为加速器地址
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://****.mirror.aliyuncs.com"]
+}
+EOF
+# 导入与重启docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+
+
+
