@@ -1,0 +1,150 @@
+## Docker-服务
+- 举例说明: 在分布式应用程序中,应用程序不同部分称为 **服务**, 如作为数据存储的数据库服务, 用于用户上传数据的并进行转码的服务, 用于前段的服务等等;
+- ** 服务实际上是"生产中的容器"**.  服务仅仅运行一个映像, 但它统一了映像的运行方式-使用的端口, 应运行的容器副本的数量等等, **扩展服务**会更改运行该软件的容器实例的数量,从而在流程中为该服务分配更多的计算资源.
+- Docker平台运行和扩展服务  只需要编写一个```docker-compose.yml``` 文件即可
+
+### 运行服务
+- 编写docker swarm init文件, 可放在任意位置, 内容如下
+```
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: taoberry/first_repository:test_image
+    deploy:
+      replicas: 5  # 运行该映像的5个实例作为一项web服务
+      resources:
+        limits:
+          cpus: "0.1"  # 核心使用为一个CPU时间的10%
+          memory: 50M  # 内存大小
+      restart_policy:
+        condition: on-failure  #  如果一个发生故障, 立即重新启动故障容器
+    ports:
+      - "4000:80"  # 主机端口映射到docker容器端口
+    networks:
+      - webnet  # 通过被称为负载平衡网络共享端口80 webnet
+networks:
+  webnet:  # 使用默认设置定义webnet网络(负载平衡的)
+```
+- 执行命令
+```
+# 初始化
+docker swarm init
+
+[output]:
+Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on different interfaces (192.168.31.177 on wlp3s0 and 172.16.155.1 on vmnet1) - specify one with --advertise-addr
+
+# 通过指定interface,解决错误
+docker swarm init --advertise-addr 192.168.31.177
+
+[output info]:
+
+Swarm initialized: current node (6smdmpanev5742mjct8j8daza) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-0qdhpaem5xd0tcs45gei1x93i5ja5yu3gfwawd0ozz2ke23j42-2xvdqui6y55igpfytegdi8z19 192.168.31.177:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+# 执行服务运行命令, 命名为: service_taoberry
+docker stack deploy -c docker-compose.yml service_taoberry
+
+[output info]:
+Creating network service_taoberry_webnet
+Creating service service_taoberry_web
+
+# 至此, 单个服务堆栈在一台主机上运行5个我们已部署映像的容器实例
+
+# 查看 服务
+docker service ls
+
+[output info]:
+ID                  NAME                   MODE                REPLICAS            IMAGE                                  PORTS
+th6yrrri239a        service_taoberry_web   replicated          5/5                 taoberry/first_repository:test_image   *:4000->80/tcp
+
+# 关注NAME, 为刚才命名的服务名_web
+# 服务中运行的单个容器称为  任务
+# 为任务分配了唯一的ID，这些ID会按数字递增，直到replicas您在docker-compose.yml文件中定义 的数量为止
+
+# 查看  任务
+docker container ls -q
+
+[output info]:
+14eccfd247e9
+5e90e5934a36
+bc2aa5ae6eab
+afcc7218bcbf
+6414044dae87
+
+# 通过刷新服务页面地址, 会随机访问上述5个container, 这样也就是负载均衡了
+
+# 查看service_taoberry 服务的所有任务
+docker stack ps service_taoberry 
+
+[output info]:
+ID                  NAME                     IMAGE                                  NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+fywx6jyedhoe        service_taoberry_web.1   taoberry/first_repository:test_image   gram                Running             Running 9 minutes ago                       
+j4gcy8tv0s9h        service_taoberry_web.2   taoberry/first_repository:test_image   gram                Running             Running 9 minutes ago                       
+o0y61oysuerg        service_taoberry_web.3   taoberry/first_repository:test_image   gram                Running             Running 9 minutes ago                       
+tx6f01ba7c2z        service_taoberry_web.4   taoberry/first_repository:test_image   gram                Running             Running 9 minutes ago                       
+mexnfj7zfre1        service_taoberry_web.5   taoberry/first_repository:test_image   gram                Running             Running 9 minutes ago 
+
+```
+- 服务应用程序的缩放(上述为5个任务container,现在只需要3个任务container)
+```
+# 修改docker-compose.yml文件  "replicas: 5"变为
+replicas: 3
+
+# 直接进行重启服务
+docker stack deploy -c docker-compose.yml service_taoberry
+ 
+[output info]:
+# 更新服务
+Updating service service_taoberry_web (id: th6yrrri239a4ti091reef1gs)
+
+# 再次查看服务
+docker container ls -q
+
+[output info]:
+# container变为了3个
+5e90e5934a36
+bc2aa5ae6eab
+6414044dae87
+
+# 放大同理
+```
+
+- 关闭应用程序服务：
+```
+# 关闭服务
+docker stack rm service_taoberry
+
+[output info]:
+Removing service service_taoberry_web
+Removing network service_taoberry_webnet
+
+
+# --force强制该节点离开群，忽略警告
+ docker swarm leave --force 
+ 
+ [output info]:
+ Node left the swarm.
+ 
+```
+
+### 命令集合
+```
+
+docker stack ls  # List stacks or apps
+docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
+docker service ls  # List running services associated with an app
+docker service ps <service>  # List tasks associated with an app
+docker inspect <task or container>  # Inspect task or container
+docker container ls -q  # List container IDs
+docker stack rm <appname>  # Tear down an application
+docker swarm leave --force  # Take down a single node swarm from the manager
+
+```
+
+
